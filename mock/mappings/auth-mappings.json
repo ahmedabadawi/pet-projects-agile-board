@@ -1,0 +1,36 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "url": "/auth/login",
+        "bodyPatterns": [ {
+          "equalToJson": { "username": "a@b.com", "password": "Password123"}
+          }]
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {"status":"Success","message":"Bearer Xjslasdaskjlj329832joiad98"},
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/auth/login",
+        "bodyPatterns": [ {
+          "equalToJson": { "username": "b@b.com", "password": "Password123"}
+          }]
+      },
+      "response": {
+        "status": 401,
+        "jsonBody": {"status":"Error","message":"Invalid username or password"},
+        "headers": {
+          "Content-Type": "application/json"
+        }
+      }
+    }
+  ]
+}
