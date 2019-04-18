@@ -13,6 +13,7 @@ import { BoardModule } from './modules/board/board.module';
 import { AdminModule } from './modules/admin/admin.module';
 
 import { LayoutComponent } from './modules/shared';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LayoutComponent } from './modules/shared';
     LoginModule,
     ProjectsModule,
     BoardModule,
-    AdminModule
+    AdminModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
