@@ -8,4 +8,22 @@
       <a class="nav-item nav-link" routerLink="/admin" routerLinkActive="active">Admin</a>
     </div>
   </div>
+  <div class="navbar-expand">
+    <div class="navbar-nav">
+      <a class="nav-item nav-link"><i class="fas fa-envelope"></i></a>
+      <div class="d-inline-block">
+        <a class="nav-item nav-link" id="alertsToggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-bell"></i>
+        </a>
+        <div aria-labeledby="alertsToggle">
+          <a class="dropdown-item" href="#">Alert 1</a>
+          <a class="dropdown-item" href="#">Alert 2</a>
+          <a class="dropdown-item" href="#">Alert 3</a>
+        </div>
+      </div>
+      <a class="nav-item nav-link" routerLink="/login" routerLinkActive="active">
+        <img src="https://placeimg.com/200/200/people" class="avatar" /> John Doe</a>
+      <a class="nav-item nav-link"><i class="fas fa-cogs"></i></a>
+    </div>
+  </div>
 </nav>
