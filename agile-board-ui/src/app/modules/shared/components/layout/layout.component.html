@@ -1,5 +1,79 @@
-<app-header></app-header>
-<div class="container">
-  <ng-content></ng-content>
-</div>
-<app-footer></app-footer>
+<mat-drawer-container class="container" autosize>
+  <mat-drawer #drawer class="sidenav">
+    <button color="primary" mat-button routerLink="/home" routerLinkActive="mat-accent"> Home </button>
+    <button color="primary" mat-button routerLink="/projects" routerLinkActive="mat-accent"> Projects </button>
+    <button color="primary" mat-button routerLink="/board" routerLinkActive="mat-accent"> Board </button>
+    <button color="primary" mat-button routerLink="/admin" routerLinkActive="mat-accent"> Admin </button>
+    <button color="primary" mat-button routerLink="/login" routerLinkActive="mat-accent"> Login </button>
+  </mat-drawer>
+  <div class="sidenav-content">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <h1>Agile Board</h1>
+        <button mat-icon-button (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <span class="spacer"></span>
+        <button mat-icon-button [matMenuTriggerFor]="notificationsMenu">
+          <mat-icon>notifications</mat-icon>
+        </button>
+        <mat-menu #notificationsMenu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>notification_important</mat-icon>
+            <span>Important Notification</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>error</mat-icon>
+            <span>Error in something you did</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>warning</mat-icon>
+            <span>Something running low</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>warning</mat-icon>
+            <span>Something need attention</span>
+          </button>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="messagesMenu">
+          <mat-icon>mail_outline</mat-icon>
+        </button>
+        <mat-menu #messagesMenu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>mail</mat-icon>
+            <span>Message 1</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>drafts</mat-icon>
+            <span>Message 2</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>mail</mat-icon>
+            <span>Message 3</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>drafts</mat-icon>
+            <span>Message 4</span>
+          </button>
+        </mat-menu>
+        <button mat-icon-button [matMenuTriggerFor]="accountMenu">
+          <img src="https://placeimg.com/200/200/people" class="avatar" />
+        </button>
+        <mat-menu #accountMenu="matMenu">
+          <div>
+            <img src="https://placeimg.com/200/200/people" class="avatar-mid" /> John Doe
+          </div>
+          <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>
+            <span>Update Profile</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Logout</span>
+          </button>
+        </mat-menu>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </div>
+</mat-drawer-container>
