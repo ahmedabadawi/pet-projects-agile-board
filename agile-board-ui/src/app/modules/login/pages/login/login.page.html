@@ -1,32 +1,21 @@
-<div class="p-5 bg-dark rounded">
-  <h1 class="text-white mb-4">
-    <b>Agile-Board</b> Login
-  </h1>
-  <div class="m-2">
-    <form>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i class="fas fa-envelope"></i>
-          </span>
-        </div>
-        <input type="email" class="form-control" placeholder="Email" />
+<mat-card class="login-form">
+  <mat-card-title>User Login</mat-card-title>
+  <mat-card-content>
+    <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="userLoginForm" (ngSubmit)="login()">
+      <mat-form-field class="full-width">
+        <input type="email" id="email" class="input" placeholder="Email Address"
+               formControlName="email" required matInput />
+      </mat-form-field>
+      <div *ngIf="formErrors.email" class="help is-danger">
+        {{ formErrors.email }}
       </div>
-      <div class="input-group">
-        <div class="input-group-prepend">
-          <span class="input-group-text">
-            <i class="fas fa-lock"></i>
-          </span>
-        </div>
-        <input type="password" class="form-control" placeholder="Password" />
+      <mat-form-field class="full-width">
+        <input type="password" id="password" class="input" placeholder="Password" matInput />
+      </mat-form-field>
+      <div *ngIf="formErrors.email" class="help is-danger">
+        {{ formErrors.password }}
       </div>
-      <div class="form-check">
-        <input type="checkbox" class="form-check-input">
-        <label class="form-check-label text-white">Remember Me</label>
-      </div>
-      <div class="input-group mt-2">
-        <button type="submit" class="btn btn-primary btn-block btn-flat">Login</button>
-      </div>
+      <button mat-raised-button  color="primary" type="submit" [disabled]="!userLoginForm.valid" (click)="login()">Login</button>
     </form>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>
