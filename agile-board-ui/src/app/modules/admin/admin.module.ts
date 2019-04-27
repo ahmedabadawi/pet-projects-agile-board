@@ -20,7 +20,11 @@ import { SharedModule } from '../shared';
 
 
 import { LayoutComponent } from './components/layout/layout.component';
+import { UserNewComponent } from './components/user-new/user-new.component';
+import { UsersListComponent } from './components/users-list/users-list.component';
 import { AdminHomePage } from './pages/admin-home/admin-home.page';
+
+import { UsersService } from './services/users.service';
 
 const routes: Routes = [
   {
@@ -55,8 +59,10 @@ const routes: Routes = [
   ],
   exports: [ RouterModule ],
   declarations: [
-    LayoutComponent, AdminHomePage
+    LayoutComponent,
+    UserNewComponent, UsersListComponent,
+    AdminHomePage
   ],
-  providers: []
+  providers: [ UsersService ]
 })
 export class AdminModule { }
