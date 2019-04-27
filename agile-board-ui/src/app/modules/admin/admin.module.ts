@@ -12,6 +12,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { CommonModule } from '@angular/common';
 
@@ -49,7 +50,8 @@ const routes: Routes = [
     MatSortModule,
     MatTabsModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTooltipModule
   ],
   exports: [ RouterModule ],
   declarations: [
