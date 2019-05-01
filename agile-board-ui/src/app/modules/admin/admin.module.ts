@@ -22,6 +22,7 @@ import { SharedModule } from '../shared';
 
 import { LayoutComponent } from './components/layout/layout.component';
 import { UserNewComponent } from './components/user-new/user-new.component';
+import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { AdminHomePage } from './pages/admin-home/admin-home.page';
 import { UserDetailsPage } from './pages/user-details/user-details.page';
@@ -65,7 +66,7 @@ const routes: Routes = [
   exports: [ RouterModule ],
   declarations: [
     LayoutComponent,
-    UserNewComponent, UsersListComponent,
+    UserNewComponent, UsersListComponent, UserDetailsComponent,
     AdminHomePage, UserDetailsPage
   ],
   providers: [ UsersService ]

@@ -4,7 +4,6 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'app-user-details',
   templateUrl: './user-details.page.html',
   styleUrls: ['./user-details.page.scss']
 })

@@ -6,5 +6,5 @@
   </mat-toolbar>
 
   <app-user-new *ngIf="isNew()"></app-user-new>
-
+  <app-user-details *ngIf="!isNew()" [userId]="userId"></app-user-details>
 </div>

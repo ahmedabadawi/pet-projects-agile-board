@@ -9,11 +9,27 @@ export class UsersService {
 
   getAll(): User[] {
     return USER_DATA;
-}
+  }
+
+  findById(userId: number): User {
+    const filtered = USER_DATA.filter((user) => user.id === +userId);
+    return (filtered != null && filtered.length === 1)
+      ? filtered[0]
+      : null;
+  }
 
   save(user: User) {
-    console.log('User Save: ' + user.email);
-    USER_DATA.push(user);
+    if (USER_DATA.some(u => u.id === user.id)) {
+      console.log('User found - Update');
+      const targetUser = USER_DATA.find(u => u.id === user.id);
+      targetUser.email = user.email;
+      targetUser.firstName = user.firstName;
+      targetUser.lastName = user.lastName;
+      targetUser.lastLogin = user.lastLogin;
+    } else {
+      console.log('User not found - Add');
+      USER_DATA.push(user);
+    }
   }
 }
 
