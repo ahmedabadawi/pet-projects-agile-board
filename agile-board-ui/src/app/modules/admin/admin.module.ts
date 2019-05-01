@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTableModule } from '@angular/material/table';
@@ -23,6 +24,7 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { UserNewComponent } from './components/user-new/user-new.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { AdminHomePage } from './pages/admin-home/admin-home.page';
+import { UserDetailsPage } from './pages/user-details/user-details.page';
 
 import { UsersService } from './services/users.service';
 
@@ -32,6 +34,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: AdminHomePage },
+      { path: 'user', component: UserDetailsPage },
+      { path: 'user/:userId', component: UserDetailsPage },
       { path: '**', redirectTo: '' }
     ]
   }
@@ -51,6 +55,7 @@ const routes: Routes = [
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
+    MatSnackBarModule,
     MatSortModule,
     MatTabsModule,
     MatTableModule,
@@ -61,7 +66,7 @@ const routes: Routes = [
   declarations: [
     LayoutComponent,
     UserNewComponent, UsersListComponent,
-    AdminHomePage
+    AdminHomePage, UserDetailsPage
   ],
   providers: [ UsersService ]
 })

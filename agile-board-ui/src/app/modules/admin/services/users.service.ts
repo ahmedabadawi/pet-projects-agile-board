@@ -9,6 +9,11 @@ export class UsersService {
 
   getAll(): User[] {
     return USER_DATA;
+}
+
+  save(user: User) {
+    console.log('User Save: ' + user.email);
+    USER_DATA.push(user);
   }
 }
 
