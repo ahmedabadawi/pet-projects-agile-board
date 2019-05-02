@@ -1,7 +1,7 @@
 <mat-card class="login-form">
   <mat-card-title>User Login</mat-card-title>
   <mat-card-content>
-    <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="userLoginForm" (ngSubmit)="login()">
+    <form [formGroup]="userLoginForm" (ngSubmit)="login()">
       <mat-form-field class="full-width">
         <input type="email" id="email" class="input" placeholder="Email Address"
                formControlName="email" required matInput />

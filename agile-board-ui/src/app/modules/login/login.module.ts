@@ -3,8 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,8 +31,6 @@ const routes: Routes = [
     ReactiveFormsModule,
     CommonModule,
     SharedModule,
-
-    FlexLayoutModule,
     
     MatButtonModule,
     MatCardModule,

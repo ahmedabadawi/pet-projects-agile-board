@@ -3,7 +3,6 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { User } from '../../models/user.model';
 
 @Component({
-  selector: 'app-admin-home',
   templateUrl: './admin-home.page.html',
   styleUrls: ['./admin-home.page.scss']
 })
