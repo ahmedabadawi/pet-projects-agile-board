@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { take } from 'rxjs/operators';
+
 import { User } from '../../models/user.model';
 
 @Component({
@@ -12,14 +14,15 @@ export class UserDetailsPage implements OnInit {
   user: User;
 
   constructor(private route: ActivatedRoute) {
-    this.route.params.subscribe(params => this.userId = params.userId);
   }
 
   ngOnInit() {
+    this.route.params
+      .pipe(take(1))
+      .subscribe(params => this.userId = params.userId);
   }
 
   isNew() {
-    console.log(this.userId);
     return (this.userId == null);
   }
 }

@@ -64,4 +64,8 @@ export class UserDetailsComponent implements OnInit {
       lastLogin: null
     };
   }
+
+  cancel() {
+    this.router.navigate(['/admin']);
+  }
 }

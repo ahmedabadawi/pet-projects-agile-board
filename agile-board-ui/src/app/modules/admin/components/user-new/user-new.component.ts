@@ -48,4 +48,8 @@ export class UserNewComponent implements OnInit {
       lastLogin: null
     };
   }
+
+  cancel() {
+    this.router.navigate(['/admin']);
+  }
 }
