@@ -11,6 +11,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { SharedModule } from '../shared';
 
 import { LayoutComponent } from './components/layout/layout.component';
+import { BoardItemComponent } from './components/board-item/board-item.component';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
+
 import { BoardHomePage } from './pages/board-home/board-home.page';
 
 const routes: Routes = [
@@ -39,7 +42,7 @@ const routes: Routes = [
   ],
   exports: [ RouterModule ],
   declarations: [
-    LayoutComponent, BoardHomePage
+    LayoutComponent, BoardItemComponent, ItemDetailsComponent, BoardHomePage
   ],
   providers: []
 })

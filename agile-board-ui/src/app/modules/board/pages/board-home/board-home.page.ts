@@ -9,6 +9,7 @@ import { Item } from '../../models/item.model';
 })
 export class BoardHomePage implements OnInit {
   backlogItems: Array<Item> = [];
+  blockedItems: Array<Item> = [];
   inProgressItems: Array<Item> = [];
   doneItems: Array<Item> = [];
 
@@ -19,6 +20,10 @@ export class BoardHomePage implements OnInit {
       switch (item.state) {
         case 'NOT_STARTED': {
           this.backlogItems.push(item);
+          break;
+        }
+        case 'BLOCKED': {
+          this.blockedItems.push(item);
           break;
         }
         case 'IN_PROGRESS': {

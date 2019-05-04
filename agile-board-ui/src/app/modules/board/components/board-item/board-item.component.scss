@@ -1,0 +1,12 @@
+.item-card {
+	margin: 5px 10px;
+	.mat-card-actions {
+		display: none;
+	}
+}
+
+.item-card:hover {
+	.mat-card-actions {
+		display: block;
+	}
+}

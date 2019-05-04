@@ -5,54 +5,24 @@
     <mat-toolbar>
       <h5 class="mat-title">Backlog</h5>
     </mat-toolbar>
-    <mat-card class="item-card" *ngFor="let backlogItem of backlogItems">
-      <mat-card-header>
-        <mat-card-title>{{ backlogItem.title }}</mat-card-title>
-        <mat-card-subtitle>Task</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ backlogItem.description }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button><mat-icon>done</mat-icon></button>
-        <button mat-button><mat-icon>block</mat-icon></button>
-      </mat-card-actions>
-    </mat-card>
+    <app-board-item *ngFor="let item of backlogItems" [item]="item"></app-board-item>
   </div>
   <div class=" mat-elevation-z4 board-column">
     <mat-toolbar>
+      <h5 class="mat-title">Blocked</h5>
+    </mat-toolbar>
+    <app-board-item *ngFor="let item of blockedItems" [item]="item"></app-board-item>
+  </div>
+  <div class="mat-elevation-z4 board-column">
+    <mat-toolbar>
       <h5 class="mat-title">In Progress</h5>
     </mat-toolbar>
-    <mat-card class="item-card" *ngFor="let inProgressItem of inProgressItems">
-      <mat-card-header>
-        <mat-card-title>{{ inProgressItem.title }}</mat-card-title>
-        <mat-card-subtitle>Task</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ inProgressItem.description }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button><mat-icon>done</mat-icon></button>
-        <button mat-button><mat-icon>block</mat-icon></button>
-      </mat-card-actions>
-    </mat-card>
+    <app-board-item *ngFor="let item of inProgressItems" [item]="item"></app-board-item>
   </div>
   <div class=" mat-elevation-z4 board-column">
     <mat-toolbar>
       <h5 class="mat-title">Done</h5>
     </mat-toolbar>
-    <mat-card class="item-card" *ngFor="let doneItem of doneItems">
-      <mat-card-header>
-        <mat-card-title>{{ doneItem.title }}</mat-card-title>
-        <mat-card-subtitle>Task</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>{{ doneItem.description }}</p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button><mat-icon>done</mat-icon></button>
-        <button mat-button><mat-icon>block</mat-icon></button>
-      </mat-card-actions>
-    </mat-card>
+    <app-board-item *ngFor="let item of doneItems" [item]="item"></app-board-item>
   </div>
 </div>

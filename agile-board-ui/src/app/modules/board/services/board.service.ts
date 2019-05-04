@@ -47,7 +47,7 @@ const ITEMS_DATA: Item[] = [
     id: 6,
     title: 'Task 6',
     description: 'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-    state: 'NOT_STARTED'
+    state: 'BLOCKED'
   },
   {
     id: 7,

@@ -7,19 +7,6 @@
 	width: 200px;
 }
 
-.item-card {
-	margin: 5px 10px;
-	.mat-card-actions {
-		display: none;
-	}
-}
-
-.item-card:hover {
-	.mat-card-actions {
-		display: block;
-	}
-}
-
 @media (max-width: 800px) {
 	.board {
 		display: block;
