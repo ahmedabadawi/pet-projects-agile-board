@@ -10,11 +10,13 @@
         {{ formErrors.email }}
       </div>
       <mat-form-field class="full-width">
-        <input type="password" id="password" class="input" placeholder="Password" matInput />
+        <input type="password" id="password" class="input" placeholder="Password"
+               formControlName="password" required matInput />
       </mat-form-field>
       <div *ngIf="formErrors.email" class="help is-danger">
         {{ formErrors.password }}
       </div>
+      <div color="warn" *ngIf(loginFailed)>The credentials provided are invalid.</div>
       <button mat-raised-button  color="primary" type="submit" [disabled]="!userLoginForm.valid" (click)="login()">Login</button>
     </form>
   </mat-card-content>

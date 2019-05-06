@@ -12,6 +12,7 @@ import { SharedModule } from '../shared';
 
 import { LayoutComponent } from './components/layout/layout.component';
 import { LoginPage } from './pages/login/login.page';
+import { LoginService } from './services/login.service';
 
 const routes: Routes = [
   {
@@ -31,7 +32,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     CommonModule,
     SharedModule,
-    
+
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
@@ -41,6 +42,6 @@ const routes: Routes = [
   declarations: [
     LayoutComponent, LoginPage
   ],
-  providers: []
+  providers: [ LoginService ]
 })
 export class LoginModule { }

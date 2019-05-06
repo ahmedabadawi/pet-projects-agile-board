@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
+import { LoginService } from '../../services/login.service';
+
 @Component({
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss']
@@ -26,8 +28,11 @@ export class LoginPage implements OnInit {
     }
   };
 
+  loginFailed = false;
+
   constructor(private router: Router,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private loginService: LoginService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -35,9 +40,9 @@ export class LoginPage implements OnInit {
 
   buildForm() {
     this.userLoginForm = this.formBuilder.group({
-      'email': ['', [ Validators.required, Validators.email ]],
+      'email': ['', [Validators.required, Validators.email]],
       'password': ['', [
-        Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$'),
+        //Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$'),
         Validators.minLength(8),
         Validators.maxLength(25)
       ]],
@@ -48,10 +53,20 @@ export class LoginPage implements OnInit {
   }
 
   onValueChanged(data?: any) {
-    // TODO: remove the error messages when changing the values
+    this.formErrors.email = '';
+    this.formErrors.password = '';
+
   }
 
   login() {
-    this.router.navigate(['/']);
+    if (this.loginService.login({
+      username: this.userLoginForm.value.email,
+      password: this.userLoginForm.value.password
+    })) {
+      this.loginFailed = false;
+      this.router.navigate(['/']);
+    } else {
+      this.loginFailed = true;
+    }
   }
 }
