@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { first } from 'rxjs/operators';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UsersService } from '../../services/users.service';
@@ -34,9 +36,19 @@ export class UserNewComponent implements OnInit {
   onSubmit() {
     const newUser: User = this.packUser();
     console.log(newUser);
-    this.usersService.save(newUser);
-    this.router.navigate(['/admin']);
-    this.snackBar.open(`User ${newUser.email} has been saved.`, 'dismiss');
+    this.usersService.save(newUser)
+      .pipe(first())
+      .subscribe(
+        result => {
+          if (result) {
+            this.router.navigate(['/admin']);
+            this.snackBar.open(`User ${newUser.email} has been saved.`, 'dismiss');
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   packUser(): User {

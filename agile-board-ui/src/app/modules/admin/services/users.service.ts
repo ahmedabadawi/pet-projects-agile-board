@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,18 +8,18 @@ import { User } from '../models/user.model';
 export class UsersService {
   constructor() { }
 
-  getAll(): User[] {
-    return USER_DATA;
+  getAll(): Observable<User[]> {
+    return of(USER_DATA);
   }
 
-  findById(userId: number): User {
+  findById(userId: number): Observable<User> {
     const filtered = USER_DATA.filter((user) => user.id === +userId);
-    return (filtered != null && filtered.length === 1)
+    return of((filtered != null && filtered.length === 1)
       ? filtered[0]
-      : null;
+      : null);
   }
 
-  save(user: User) {
+  save(user: User): Observable<boolean> {
     if (USER_DATA.some(u => u.id === user.id)) {
       console.log('User found - Update');
       const targetUser = USER_DATA.find(u => u.id === user.id);
@@ -30,6 +31,7 @@ export class UsersService {
       console.log('User not found - Add');
       USER_DATA.push(user);
     }
+    return of(true);
   }
 }
 

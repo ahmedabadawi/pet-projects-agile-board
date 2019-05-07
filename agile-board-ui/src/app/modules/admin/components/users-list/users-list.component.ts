@@ -1,4 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { first } from 'rxjs/operators';
+
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -25,7 +27,16 @@ export class UsersListComponent implements OnInit {
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
-    this.dataSource = new MatTableDataSource<User>(this.usersService.getAll());
+    this.usersService.getAll()
+      .pipe(first())
+      .subscribe(
+        users => {
+          this.dataSource = new MatTableDataSource<User>(users);
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   applyFilter(filterValue: string) {

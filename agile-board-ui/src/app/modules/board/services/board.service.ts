@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,8 +8,8 @@ import { Item } from '../models/item.model';
 export class BoardService {
   constructor() { }
 
-  getBoard(): Item[] {
-    return ITEMS_DATA;
+  getBoard(): Observable<Item[]> {
+    return of(ITEMS_DATA);
   }
 }
 

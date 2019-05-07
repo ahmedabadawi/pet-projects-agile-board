@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { first } from 'rxjs/operators';
+
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { UsersService } from '../../services/users.service';
@@ -30,20 +32,38 @@ export class UserDetailsComponent implements OnInit {
 
   ngOnInit() {
     console.log('Finding user for id:' + this.userId);
-    const user = this.usersService.findById(this.userId);
-    if (user) {
-      this.fillForm(user);
-    } else {
-      // TODO: Show error that the user id is incorrect
-    }
+    this.usersService.findById(this.userId)
+      .pipe(first())
+      .subscribe(
+        user => {
+          if (user) {
+            this.fillForm(user);
+          } else {
+            // TODO: Show error that the user id is incorrect
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   onSubmit() {
     const updatedUser: User = this.packUser();
     console.log(updatedUser);
-    this.usersService.save(updatedUser);
-    this.router.navigate(['/admin']);
-    this.snackBar.open(`User ${updatedUser.email} has been saved.`, 'dismiss');
+    this.usersService.save(updatedUser)
+      .pipe(first())
+      .subscribe(
+        result => {
+          if (result) {
+            this.router.navigate(['/admin']);
+            this.snackBar.open(`User ${updatedUser.email} has been saved.`, 'dismiss');
+          }
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   fillForm(user: User) {

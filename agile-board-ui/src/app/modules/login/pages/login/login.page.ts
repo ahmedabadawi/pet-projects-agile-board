@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 import { LoginService } from '../../services/login.service';
 
@@ -59,14 +60,22 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    if (this.loginService.login({
+    this.loginService.login({
       username: this.userLoginForm.value.email,
       password: this.userLoginForm.value.password
-    })) {
-      this.loginFailed = false;
-      this.router.navigate(['/']);
-    } else {
-      this.loginFailed = true;
-    }
+      })
+      .pipe(first())
+      .subscribe(
+        response => {
+          if (response) {
+            this.loginFailed = false;
+            this.router.navigate(['/']);
+          } else {
+            this.loginFailed = true;
+          }
+        },
+        error => {
+          console.log(error);
+        });
   }
 }

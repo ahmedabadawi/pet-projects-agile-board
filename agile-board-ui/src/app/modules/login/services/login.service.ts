@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
 
 import { Credentials } from '../models/credentials.model';
 import {
@@ -14,7 +16,7 @@ export class LoginService {
   constructor(private authService: AuthService,
               private profileService: ProfileService) { }
 
-  login(credentials: Credentials) {
+  login(credentials: Credentials): Observable<boolean> {
     if (credentials
       && credentials.username === 'admin@corp.com'
       && credentials.password === 'Pa$$w0rd') {
@@ -26,8 +28,8 @@ export class LoginService {
 
       this.authService.login(token, profile);
 
-      return true;
+      return of(true);
     }
-    return false;
+    return of(false);
   }
 }
