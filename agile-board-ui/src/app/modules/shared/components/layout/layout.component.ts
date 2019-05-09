@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
 import { AuthService, UserProfile } from '../../../core';
 
@@ -8,16 +9,24 @@ import { AuthService, UserProfile } from '../../../core';
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent implements OnInit, OnDestroy {
+  currentUserSubscription: Subscription;
+
   currentUser: UserProfile;
 
   constructor(private router: Router,
               private authService: AuthService) {
-    this.currentUser = this.authService.getCurrentUser();
   }
 
   ngOnInit() {
-    this.currentUser = this.authService.getCurrentUser();
+    this.currentUserSubscription =
+      this.authService.currentUser.subscribe((authUser) => {
+        this.currentUser = (authUser) ? authUser.profile : null;
+      });
+  }
+
+  ngOnDestroy() {
+    this.currentUserSubscription.unsubscribe();
   }
 
   logout() {

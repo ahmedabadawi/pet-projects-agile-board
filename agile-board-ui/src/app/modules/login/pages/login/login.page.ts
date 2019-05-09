@@ -67,6 +67,7 @@ export class LoginPage implements OnInit {
       .pipe(first())
       .subscribe(
         response => {
+          console.log(response);
           if (response) {
             this.loginFailed = false;
             this.router.navigate(['/']);
