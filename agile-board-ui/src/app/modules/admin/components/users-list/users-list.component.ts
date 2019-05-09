@@ -15,7 +15,7 @@ import { UsersService } from '../../services/users.service';
   styleUrls: [ './users-list.component.scss' ]
 })
 export class UsersListComponent implements OnInit {
-  @Output() selectionChanged:EventEmitter<SelectionModel<User>> = new EventEmitter<SelectionModel<User>>();
+  @Output() selectionChanged: EventEmitter<SelectionModel<User>> = new EventEmitter<SelectionModel<User>>();
 
   displayedColumns = [ 'select', 'userId', 'email', 'firstName', 'lastName', 'lastLogin' ];
   dataSource: MatTableDataSource<User>;

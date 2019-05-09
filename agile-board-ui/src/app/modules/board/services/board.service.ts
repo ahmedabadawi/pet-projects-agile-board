@@ -2,17 +2,6 @@ import { Injectable } from '@angular/core';
 import { Item } from '../models/item.model';
 import { Observable, of } from 'rxjs';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class BoardService {
-  constructor() { }
-
-  getBoard(): Observable<Item[]> {
-    return of(ITEMS_DATA);
-  }
-}
-
 const ITEMS_DATA: Item[] = [
   {
     id: 1,
@@ -57,3 +46,15 @@ const ITEMS_DATA: Item[] = [
     state: 'NOT_STARTED'
   }
 ];
+
+
+@Injectable({
+  providedIn: 'root'
+})
+export class BoardService {
+  constructor() { }
+
+  getBoard(): Observable<Item[]> {
+    return of(ITEMS_DATA);
+  }
+}

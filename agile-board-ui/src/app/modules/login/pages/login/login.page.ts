@@ -10,22 +10,22 @@ import { LoginService } from '../../services/login.service';
   styleUrls: ['./login.page.scss']
 })
 export class LoginPage implements OnInit {
-  userLoginForm: FormGroup
+  userLoginForm: FormGroup;
   formErrors = {
-    'email': '',
-    'password': ''
+    email: '',
+    password: ''
   };
 
   validationMessages = {
-    'email': {
-      'required': 'Please enter your email',
-      'email': 'Please enter your valid email'
+    email: {
+      required: 'Please enter your email',
+      email: 'Please enter your valid email'
     },
-    'password': {
-      'required': 'Please enter your password',
-      'pattern': 'The password must contain numbers and letters',
-      'minlength': 'The password should be more than 8 characters',
-      'maxlength': 'The password should be less than 25 characters'
+    password: {
+      required: 'Please enter your password',
+      pattern: 'The password must contain numbers and letters',
+      minlength: 'The password should be more than 8 characters',
+      maxlength: 'The password should be less than 25 characters'
     }
   };
 
@@ -41,9 +41,9 @@ export class LoginPage implements OnInit {
 
   buildForm() {
     this.userLoginForm = this.formBuilder.group({
-      'email': ['', [Validators.required, Validators.email]],
-      'password': ['', [
-        //Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$'),
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [
+        // Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8})$'),
         Validators.minLength(8),
         Validators.maxLength(25)
       ]],

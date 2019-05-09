@@ -19,7 +19,7 @@ describe('Shared / LayoutComponent', () => {
       imports: [
         RouterTestingModule,
         BrowserAnimationsModule,
-        
+
         MatButtonModule,
         MatIconModule,
         MatMenuModule,

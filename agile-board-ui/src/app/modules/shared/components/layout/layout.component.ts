@@ -39,6 +39,6 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   getFullName() {
-    return (this.currentUser) ? `${this.currentUser.firstName} ${this.currentUser.lastName}`: '';
+    return (this.currentUser) ? `${this.currentUser.firstName} ${this.currentUser.lastName}` : '';
   }
 }

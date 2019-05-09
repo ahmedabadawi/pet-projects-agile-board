@@ -26,7 +26,7 @@ export class AuthService {
   }
 
   public getCurrentUserProfile(): UserProfile {
-    return (this.isAuthenticated) ? this.currentUserEmitter.value.profile: null;
+    return (this.isAuthenticated) ? this.currentUserEmitter.value.profile : null;
   }
 
   public isAuthenticated(): boolean {
