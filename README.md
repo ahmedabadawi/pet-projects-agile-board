@@ -5,9 +5,9 @@ Agile board is a simple project management tool being built as a Pet Project to 
 ## Technologies
 - Java 11
 - SpringBoot
-- MongoDB
+- MySQL
 - AngularJS
-- Semantic-UI
+- Angular Material 
 
 
 ## Features
@@ -16,4 +16,3 @@ Agile board is a simple project management tool being built as a Pet Project to 
 - Assign Project Team
 - Create Project Backlog
 - Kanban Board
-- Sprint Board
