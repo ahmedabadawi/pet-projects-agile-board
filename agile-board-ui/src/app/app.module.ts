@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
@@ -17,13 +18,18 @@ import { AdminModule } from './modules/admin/admin.module';
 import { LayoutComponent } from './modules/shared';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// import { ServicesStubInterceptor } from './modules/core/interceptors';
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
+
     CoreModule,
     SharedModule,
     HomeModule,
@@ -31,10 +37,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ProjectsModule,
     BoardModule,
     AdminModule,
-    BrowserAnimationsModule
   ],
   providers: [
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+    // { provide: HTTP_INTERCEPTORS, useClass: ServicesStubInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

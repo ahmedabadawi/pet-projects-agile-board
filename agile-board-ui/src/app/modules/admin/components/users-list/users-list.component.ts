@@ -21,20 +21,25 @@ export class UsersListComponent implements OnInit {
   dataSource: MatTableDataSource<User>;
   selection = new SelectionModel<User>(true, []);
 
+  loading = false;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(private usersService: UsersService) { }
 
   ngOnInit() {
+    this.loading = true;
     this.usersService.getAll()
       .pipe(first())
       .subscribe(
         users => {
           this.dataSource = new MatTableDataSource<User>(users);
+          this.loading = false;
         },
         error => {
           console.log(error);
+          this.loading = false;
         }
       );
   }
