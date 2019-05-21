@@ -73,10 +73,12 @@ export class LoginPage implements OnInit {
             this.router.navigate(['/']);
           } else {
             this.loginFailed = true;
+            console.log('Login failed');
           }
         },
         error => {
           console.log(error);
+          this.loginFailed = true;
         });
   }
 }

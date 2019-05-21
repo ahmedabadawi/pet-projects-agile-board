@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
-import { concatMap } from 'rxjs/operators';
+import { concatMap, catchError } from 'rxjs/operators';
 
 import { Credentials } from '../models/credentials.model';
 import {
@@ -14,28 +15,37 @@ import {
 })
 export class LoginService {
 
-  constructor(private authService: AuthService,
+  constructor(private http: HttpClient,
+              private authService: AuthService,
               private profileService: ProfileService) { }
 
   login(credentials: Credentials): Observable<boolean> {
-    if (credentials
-      && credentials.username === 'admin@corp.com'
-      && credentials.password === 'Pa$$w0rd') {
+    return this.http.post<any>('http://localhost:8080/api/auth/login', JSON.stringify(credentials))
+      .pipe(concatMap((loginResponse) => {
+        console.log('Succeeded Login - ' + credentials.username);
+        const token = loginResponse.token;
+        const userId = loginResponse.userId;
 
-      console.log('Succeeded Login - ' + credentials.username);
-      const token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZ2lsZS1ib2FyZCIsImlhdCI6MTU1NzE3NzUzOCwiZXhwIjoxNTg4NzEzNTM4LCJhdWQiOiJhZ2lsZS5ib2FyZC5pbyIsInN1YiI6IjEiLCJSb2xlIjoiQURNSU4ifQ.igt5Ip7Ej8VOec0JZSbhJj28yn4CIkxQ1MwaPQp-iZc';
-      const userId = 1;
+        return this.profileService.getUserProfile(userId)
+          .pipe(concatMap(profile => {
+            console.log('Got Profile: ' + profile.firstName);
+            this.authService.login(token, profile);
+            console.log('Logged In - ' + profile.firstName);
 
-      return this.profileService.getUserProfile(userId)
-        .pipe(concatMap(profile => {
-          console.log('Got Profile: ' + profile.firstName);
-          this.authService.login(token, profile);
-          console.log('Logged In - ' + profile.firstName);
-          return of(true);
-        }));
-    } else {
-      console.log('Failed Login - ' + credentials.username);
-      return of(false);
-    }
+            return of(true);
+          }));
+      }),
+      catchError((error) => {
+        console.log(error);
+        console.log(error.status);
+        console.log(error.message);
+        return of(false);
+      }));
   }
+}
+
+interface AuthResponse {
+  status: string;
+  token: string;
+  userId: number;
 }
