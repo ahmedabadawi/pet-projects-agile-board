@@ -1,0 +1,83 @@
+{
+  "mappings": [
+   {
+      "request": {
+        "method": "GET",
+        "url": "/api/projects"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": [
+          {
+            "id": 1,
+            "code": "XYZ",
+            "name": "Project XYZ",
+            "adminId": 1
+          },
+          {
+            "id": 2,
+            "code": "ABC",
+            "name": "Project ABC",
+            "adminId": 1
+          },
+          {
+            "id": 3,
+            "code": "YMCA",
+            "name": "Project YMCA",
+            "adminId": 1
+          }
+        ],
+        "headers": {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*",
+          "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Encoding, Server, Transfer-Encoding",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block"
+        }
+      }
+    }, 
+    {
+      "request": {
+        "method": "GET",
+        "url": "/api/projects/XYZ"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": 1,
+          "code": "XYZ",
+          "name": "Project XYZ",
+          "adminId": 1,
+          "description": "Project XYZ Description"
+        },
+        "headers": {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*",
+          "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Encoding, Server, Transfer-Encoding",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block"
+        }
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "url": "/api/projects"
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*",
+          "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Encoding, Server, Transfer-Encoding",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block"
+        }
+      }
+    }
+  ]
+}
+

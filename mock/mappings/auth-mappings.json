@@ -1,34 +1,47 @@
 {
   "mappings": [
     {
+      "priority": 1,
       "request": {
         "method": "POST",
-        "url": "/auth/login",
+        "url": "/api/auth/login",
         "bodyPatterns": [ {
-          "equalToJson": { "username": "a@b.com", "password": "Password123"}
+          "equalToJson": { "username": "admin@corp.com", "password": "Password1234"}
           }]
       },
       "response": {
         "status": 200,
-        "jsonBody": {"status":"Success","message":"Bearer Xjslasdaskjlj329832joiad98"},
+        "jsonBody": {
+          "status": "Success",
+          "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhZ2lsZS1ib2FyZCIsImlhdCI6MTU1NzE3NzUzOCwiZXhwIjoxNTg4NzEzNTM4LCJhdWQiOiJhZ2lsZS5ib2FyZC5pbyIsInN1YiI6IjEiLCJSb2xlIjoiQURNSU4ifQ.igt5Ip7Ej8VOec0JZSbhJj28yn4CIkxQ1MwaPQp-iZc",
+          "userId": 1
+        },
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*",
+          "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Encoding, Server, Transfer-Encoding",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block"
         }
       }
     },
     {
+      "priority": 5,
       "request": {
         "method": "POST",
-        "url": "/auth/login",
-        "bodyPatterns": [ {
-          "equalToJson": { "username": "b@b.com", "password": "Password123"}
-          }]
+        "url": "/api/auth/login"
       },
       "response": {
         "status": 401,
         "jsonBody": {"status":"Error","message":"Invalid username or password"},
         "headers": {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*",
+          "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Encoding, Server, Transfer-Encoding",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block"
         }
       }
     }

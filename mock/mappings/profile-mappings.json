@@ -1,0 +1,29 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "GET",
+        "url": "/api/profile/1"
+      },
+      "response": {
+        "status": 200,
+        "jsonBody": {
+          "id": 1,
+          "email": "admin@corp.com",
+          "firstName": "Admin",
+          "lastName": "Admin",
+          "avatar": "https://placeimg.com/200/200/people",
+          "role": "ADMIN"
+        },
+        "headers": {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "*",
+          "Access-Control-Allow-Headers": "Accept, Content-Type, Content-Encoding, Server, Transfer-Encoding",
+          "x-frame-options": "DENY",
+          "x-xss-protection": "1; mode=block"
+        }
+      }
+    }
+  ]
+}
