@@ -6,6 +6,7 @@ import { concatMap, catchError } from 'rxjs/operators';
 
 import { Credentials } from '../models/credentials.model';
 import {
+  ConfigService,
   AuthService,
   ProfileService
 } from '../../core';
@@ -15,12 +16,13 @@ import {
 })
 export class LoginService {
 
-  constructor(private http: HttpClient,
+  constructor(private config: ConfigService,
+              private http: HttpClient,
               private authService: AuthService,
               private profileService: ProfileService) { }
 
   login(credentials: Credentials): Observable<boolean> {
-    return this.http.post<any>('http://localhost:8080/api/auth/login', JSON.stringify(credentials))
+    return this.http.post<any>(this.config.api + '/api/auth/login', JSON.stringify(credentials))
       .pipe(concatMap((loginResponse) => {
         console.log('Succeeded Login - ' + credentials.username);
         const token = loginResponse.token;

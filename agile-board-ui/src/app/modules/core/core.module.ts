@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { AuthService, ProfileService } from './';
+import { ConfigService, AuthService, ProfileService } from './';
 
 @NgModule({
   declarations: [],
@@ -9,6 +9,7 @@ import { AuthService, ProfileService } from './';
     CommonModule
   ],
   providers: [
+    ConfigService,
     AuthService,
     ProfileService
   ]

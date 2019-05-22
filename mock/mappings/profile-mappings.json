@@ -10,8 +10,8 @@
         "jsonBody": {
           "id": 1,
           "email": "admin@corp.com",
-          "firstName": "Admin",
-          "lastName": "Admin",
+          "firstName": "John",
+          "lastName": "Doe",
           "avatar": "https://placeimg.com/200/200/people",
           "role": "ADMIN"
         },
