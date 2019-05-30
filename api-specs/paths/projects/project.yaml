@@ -1,0 +1,58 @@
+parameters:
+  - $ref: '#/components/parameters/projectCodeParam'
+get:
+  operationId: getProject
+  summary: Get project details
+  tags:
+    - project
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: The project details
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Project'
+    '401':
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+put:
+  operationId: updateProject
+  summary: Update project details
+  tags:
+    - project
+  security:
+    - bearerAuth: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/Project'
+  responses:
+    '200':
+      description: Project Updated
+    '404':
+      description: Project does not exist
+    '401':
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+delete:
+  operationId: deleteProject
+  summary: Delete a project
+  tags:
+    - project
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: Project deleted
+    '404':
+      description: Project does not exist
+    '401':
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+

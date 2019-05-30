@@ -1,0 +1,56 @@
+post:
+  operationId: login
+  summary: Authenticates the user credentials
+  tags:
+    - auth
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/Credentials'
+  responses:
+    '200':
+      description: User authenticated
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthToken'
+    '401':
+      description: User credentials are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    default:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+delete:
+  operationId: logout
+  summary: Logs out the user based on the authentication token
+  tags:
+    - auth
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: User logged out
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Message'
+    '401':
+      description: User credentials are invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    default:
+      description: Unexpected Error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'

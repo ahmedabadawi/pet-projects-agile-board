@@ -1,0 +1,83 @@
+securitySchemes:
+  bearerAuth:
+    type: http
+    scheme: bearer
+    bearerFormat: JWT
+schemas:
+  $ref: ./auth/index.yaml
+  $ref: ./board/index.yaml
+  $ref: ./profile/index.yaml
+  $ref: ./projects/index.yaml
+  $ref: ./users/index.yaml
+
+  # General definitions
+  Message:
+    properties:
+      message:
+        type: string
+  Error:
+    properties:
+      message:
+        type: string
+
+parameters:
+  # General Parameters
+  offsetParam:
+    in: query
+    name: offset
+    required: false
+    schema:
+      type: integer
+      minimum: 0
+    description: The number of items to skip before starting to collect the result set.
+  limitParam:
+    in: query
+    name: limit
+    required: false
+    schema:
+      type: integer
+      minimum: 1
+      maximum: 50
+      default: 20
+    description: The numbers of items to return.
+
+
+  userIdParam:
+    in: path
+    name: userId
+    required: true
+    schema:
+      type: string
+  projectCodeParam:
+    in: path
+    name: projectCode
+    required: true
+    schema:
+      type: string
+  sprintCodeParam:
+    in: path
+    name: sprintCode
+    required: true
+    schema:
+      type: string
+  cardIdParam:
+    in: path
+    name: cardId
+    required: true
+    schema:
+      type: string
+responses:
+  # Auth Responses
+  UnauthorizedError:
+    description: Access token is missing or invalid
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/Error'
+  GeneralError:
+    description: Unexpected Error
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/Error'
+

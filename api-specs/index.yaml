@@ -5,429 +5,8 @@ info:
 security:
   - bearerAuth: []
 paths:
-  /auth:
-    post:
-      operationId: login
-      summary: Authenticates the user credentials
-      tags:
-        - auth
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Credentials'
-      responses:
-        '200':
-          description: User authenticated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AuthToken'
-        '401':
-          description: User credentials are invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        default:
-          description: Unexpected Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-    delete:
-      operationId: logout
-      summary: Logs out the user based on the authentication token
-      tags:
-        - auth
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: User logged out
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Message'
-        '401':
-          description: User credentials are invalid
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        default:
-          description: Unexpected Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-  /profile:
-    get:
-      operationId: getCurrentUserProfile
-      summary: Retrieve the profile of the current user
-      tags:
-        - profile
-      security:
-        - bearerAuth: []
-      responses:
-        '200':
-          description: Current User Profile
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserProfile'
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      operationId: updateCurrentUserProfile
-      summary: Update the profile of the current user
-      tags:
-        - profile
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /users:
-    get:
-      operationId: getUsers
-      summary: List all users
-      tags:
-        - admin
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      operationId: createUser
-      summary: Create new user
-      tags:
-        - admin
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /users/{userId}:
-    parameters:
-      - $ref: '#/components/parameters/userIdParam'
-    get:
-      operationId: getUser
-      summary: Get user details
-      tags:
-        - admin
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    put:
-      operationId: updateUser
-      summary: Update user details
-      tags:
-        - admin
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    delete:
-      operationId: deleteUser
-      summary: Delete a user
-      tags:
-        - admin
-      security:
-        - bearerAuth: []
-      parameters:
-        - $ref: '#/components/parameters/userIdParam'
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /projects:
-    get:
-      operationId: getProjects
-      summary: List all projects
-      tags:
-        - project
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      operationId: createProject
-      summary: Create a new project
-      tags:
-        - project
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /projects/{projectCode}:
-    parameters:
-      - $ref: '#/components/parameters/projectCodeParam'
-    get:
-      operationId: getProject
-      summary: Get project details
-      tags:
-        - project
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    put:
-      operationId: updateProject
-      summary: Update project details
-      tags:
-        - project
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    delete:
-      operationId: deleteProject
-      summary: Delete a project
-      tags:
-        - project
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /projects/{projectCode}/members:
-    parameters:
-      - $ref: '#/components/parameters/projectCodeParam'
-    get:
-      operationId: getProjectMembers
-      summary: List project team members
-      tags:
-        - project
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    put:
-      operationId: addProjectMember
-      summary: Add new team member to a project
-      tags:
-        - project
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /projects/{projectCode}/members/{userId}:
-    parameters:
-      - $ref: '#/components/parameters/projectCodeParam'
-      - $ref: '#/components/parameters/userIdParam'
-    delete:
-      operationId: removeProjectMember
-      summary: Remove team member from a project
-      tags:
-        - project
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /projects/{projectCode}/backlog:
-    parameters:
-      - $ref: '#/components/parameters/projectCodeParam'
-    get:
-      operationId: getProjectBacklog
-      summary: List all project backlog cards
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    put:
-      operationId: addCard
-      summary: Create a new card in the project backlog
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /projects/{projectCode}/sprints:
-    parameters:
-      - $ref: '#/components/parameters/projectCodeParam'
-    get:
-      operationId: getProjectSprints
-      summary: List project sprints
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    post:
-      operationId: createSprint
-      summary: Create a new sprint
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /projects/{projectCode}/sprints/{sprintCode}:
-    parameters:
-      - $ref: '#/components/parameters/projectCodeParam'
-      - $ref: '#/components/parameters/sprintCodeParam'
-    get:
-      operationId: getSprint
-      summary: Get sprint board; backlog, in-progress, done, etc.
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    put:
-      operationId: updateSprint
-      summary: Update sprint details
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    delete:
-      operationId: deleteSprint
-      summary: Delete a sprint
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /projects/{projectCode}/sprints/{sprintCode}/backlog:
-    parameters:
-      - $ref: '#/components/parameters/projectCodeParam'
-      - $ref: '#/components/parameters/sprintCodeParam'
-    put:
-      operationId: addCardToSprint
-      summary: Add card to sprint backlog from project backlog
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    delete:
-      operationId: removeCardFromSprint
-      summary: Remove card from sprint backlog back to project backlog
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-  /projects/{projectCode}/cards/{cardId}:
-    parameters:
-      - $ref: '#/components/parameters/projectCodeParam'
-      - $ref: '#/components/parameters/cardIdParam'
-    get:
-      operationId: getCard
-      summary: Retrieve card details
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    put:
-      operationId: updateCard
-      summary: Update card details
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
-    delete:
-      operationId: deleteCard
-      summary: Delete a card from the project
-      tags:
-        - board
-      security:
-        - bearerAuth: []
-      responses:
-        '401':
-          $ref: '#/components/responses/UnauthorizedError'
-        default:
-          $ref: '#/components/responses/GeneralError'
+  $ref: ./paths/index.yaml
+
 components:
   securitySchemes:
     bearerAuth:
@@ -452,7 +31,34 @@ components:
         expiresAt:
           type: string
           format: date-time
-
+    
+    # Admin definitions
+    UsersList:
+      properties:
+        total:
+          type: number
+        users:
+          type: array
+          items:
+            $ref: '#/components/schemas/User'
+    
+    User:
+      properties:
+        id:
+          type: number
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        status:
+          type: string
+          enum: [ active, inactive, deleted ]
+        lastLogin:
+          type: string
+          format: date-time
+          
     # User Profile definitions
     UserProfile:
       properties:
@@ -530,6 +136,10 @@ components:
     # Auth Responses
     UnauthorizedError:
       description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
     GeneralError:
       description: Unexpected Error
       content:

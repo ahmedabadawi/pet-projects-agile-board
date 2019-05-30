@@ -1,0 +1,58 @@
+parameters:
+  - $ref: '#/components/parameters/userIdParam'
+get:
+  operationId: getUser
+  summary: Get user details
+  tags:
+    - admin
+  security:
+    - bearerAuth: []
+  responses:
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+put:
+  operationId: updateUser
+  summary: Update user details
+  tags:
+    - admin
+  security:
+    - bearerAuth: []
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schems/User'
+  responses:
+    '200':
+      description: User updated
+    '404':
+      description: User does not exist
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+delete:
+  operationId: deleteUser
+  summary: Delete a user
+  tags:
+    - admin
+  security:
+    - bearerAuth: []
+  parameters:
+    - $ref: '#/components/parameters/userIdParam'
+  responses:
+    '200':
+      description: User deleted
+    '404':
+      description: User does not exist
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+

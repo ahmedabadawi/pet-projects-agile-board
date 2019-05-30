@@ -1,0 +1,38 @@
+get:
+  operationId: getUsers
+  summary: List all users
+  tags:
+    - admin
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: List of users
+      content:
+        application/json:
+          $ref: '#/components/schemas/UserList'
+    '401':
+      $ref: '#/components/responses/Unauthorized'
+    default:
+      $ref: '#/components/responses/GeneralError'
+post:
+  operationId: createUser
+  summary: Create new user
+  tags:
+    - admin
+  security:
+    - bearerAuth: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/User'
+  responses:
+    '200':
+      description: User created
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+

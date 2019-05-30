@@ -1,0 +1,33 @@
+get:
+  operationId: getCurrentUserProfile
+  summary: Retrieve the profile of the current user
+  tags:
+    - profile
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: Current User Profile
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/UserProfile'
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+post:
+  operationId: updateCurrentUserProfile
+  summary: Update the profile of the current user
+  tags:
+    - profile
+  security:
+    - bearerAuth: []
+  responses:
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+

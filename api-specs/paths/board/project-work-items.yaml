@@ -1,0 +1,20 @@
+put:
+  operationId: addCard
+  summary: Create a new card in the project backlog
+  tags:
+    - board
+  security:
+    - bearerAuth: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/WorkItem'
+  responses:
+    '200':
+      description: Work item created
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'

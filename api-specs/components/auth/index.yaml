@@ -1,0 +1,17 @@
+Credentials:
+  required:
+    - email
+    - password
+  properties:
+    email:
+      type: string
+    password:
+      type: string
+AuthToken:
+  properties:
+    token:
+      type: string
+    expiresAt:
+      type: string
+      format: date-time
+

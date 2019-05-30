@@ -1,0 +1,32 @@
+Board:
+  description: The list of active work-items for a project
+  properties:
+    projectId:
+      type: integer
+    projectCode:
+      type: string
+    items:
+      type: array
+      items:
+        $ref: '#/components/schemas/WorkItem'
+
+WorkItem:
+  description: The generic work item; story, task,...
+  properties:
+    workItemId:
+      type: integer
+    projectId:
+      type: integer
+    projectCode:
+      type: string
+    stereotype:
+      type: string
+      enum: [ 'EPIC', 'STORY', 'TASK', 'BUG' ],
+    title:
+      type: string
+    description:
+      type: string
+    status:
+      type: string
+      enum: [ 'NOT-STARTED', 'IN-PROGRESS', 'BLOCKED', 'DONE' ]
+

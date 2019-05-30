@@ -1,0 +1,22 @@
+/api/auth:
+  $ref: ./auth/auth.yaml
+/api/users:
+  $ref: ./admin/users.yaml
+/api/users/{user-id}:
+  $ref: ./admin/user.yaml
+/api/profile/{user-id}:
+  $ref: ./profile/profile.yaml
+/api/projects:
+  $ref: ./projects/projects.yaml
+/api/projects/{project-code}:
+  $ref: ./projects/project.yaml
+/api/projects/{project-code}/members:
+  $ref: ./projects/project-members.yaml
+/api/projects/{project-code}/members/{userId}:
+  $ref: ./projects/project-member.yaml
+/api/projects/{project-code}/board:
+  $ref: ./board/project-board.yaml
+/api/projects/{project-code}/work-items:
+  $ref: ./board/project-work-items.yaml
+/api/projects/{project-code}/work-item/{work-item-id}:
+  $ref: ./board/project-work-item.yaml

@@ -1,0 +1,42 @@
+parameters:
+  - $ref: '#/components/parameters/projectCodeParam'
+get:
+  operationId: getProjectMembers
+  summary: List project team members
+  tags:
+    - project
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: List of project members
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectMembersList'
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+put:
+  operationId: addProjectMember
+  summary: Add new team member to a project
+  tags:
+    - project
+  security:
+    - bearerAuth: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/ProjectMember'
+  responses:
+    '200':
+      description: User is assigned to the project
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+

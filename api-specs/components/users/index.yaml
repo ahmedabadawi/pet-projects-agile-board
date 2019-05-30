@@ -1,0 +1,26 @@
+UsersList:
+  properties:
+    total:
+      type: number
+    users:
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+
+User:
+  properties:
+    id:
+      type: number
+    firstName:
+      type: string
+    lastName:
+      type: string
+    email:
+      type: string
+    status:
+      type: string
+      enum: [ active, inactive, deleted ]
+    lastLogin:
+      type: string
+      format: date-time
+

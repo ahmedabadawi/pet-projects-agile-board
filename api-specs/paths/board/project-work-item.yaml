@@ -1,0 +1,63 @@
+parameters:
+  - $ref: '#/components/parameters/projectCodeParam'
+  - $ref: '#/components/parameters/cardIdParam'
+get:
+  operationId: getCard
+  summary: Retrieve card details
+  tags:
+    - board
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: The work item card
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/WorkItem'
+    '404':
+      description: The work item does not exist
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+put:
+  operationId: updateCard
+  summary: Update card details
+  tags:
+    - board
+  security:
+    - bearerAuth: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/WorkItem'
+  responses:
+    '200':
+      description: Work item updated
+    '404':
+      description: Work item does not exist
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+delete:
+  operationId: deleteCard
+  summary: Delete a card from the project
+  tags:
+    - board
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: Work item deleted
+    '404':
+      description: Work item does not exist
+    '401':
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+

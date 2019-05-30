@@ -1,0 +1,22 @@
+parameters:
+  - $ref: '#/components/parameters/projectCodeParam'
+get:
+  operationId: getProjectBoard
+  summary: Get Project board; backlog, in-progress, done, etc.
+  tags:
+    - board
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: List of the active project board work-items
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Board'
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+

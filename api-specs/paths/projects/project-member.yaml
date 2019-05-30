@@ -1,0 +1,21 @@
+parameters:
+  - $ref: '#/components/parameters/projectCodeParam'
+  - $ref: '#/components/parameters/userIdParam'
+delete:
+  operationId: removeProjectMember
+  summary: Remove team member from a project
+  tags:
+    - project
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: Member de-assigned from project
+    '404':
+      description: Project/Member does not exist or member is not assigned to the project 
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+

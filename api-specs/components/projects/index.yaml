@@ -1,0 +1,59 @@
+ProjectsList:
+  description: The list of defined projects
+  properties:
+    total:
+      type: integer
+    projects:
+      type: array
+      items:
+        $ref: '#/components/schemas/Project'
+  
+Project:
+  description: Project information
+  properties:
+    id:
+      type: integer
+    code:
+      type: string
+    title:
+      type: string
+    description:
+      type: string
+    startDate:
+      type: string
+      format: date-time
+    endDate:
+      type: string
+      format: date-time
+    adminId:
+      type: integer
+
+ProjectMember:
+  description: User assignment to a project
+  properties:
+    projectId:
+      type: integer
+    projectCode:
+      type: string
+    userId:
+      type: integer
+    firstName:
+      type: string
+    lastName:
+      type: string
+    email:
+      type: string
+      format: email
+    startDate:
+      type: string
+      format: date-time
+
+ProjectMembersList:
+  description: The list of project members
+  properties:
+    total:
+      type: integer
+    members:
+      type: array
+      items:
+        $ref: '#/components/schemas/ProjectMember'

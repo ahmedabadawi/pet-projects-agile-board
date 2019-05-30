@@ -1,0 +1,40 @@
+get:
+  operationId: getProjects
+  summary: List all projects
+  tags:
+    - project
+  security:
+    - bearerAuth: []
+  responses:
+    '200':
+      description: List of projects
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProjectsList'
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+post:
+  operationId: createProject
+  summary: Create a new project
+  tags:
+    - project
+  security:
+    - bearerAuth: []
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/Project'
+  responses:
+    '200':
+      description: Project created
+    '401':
+      description: Unauthorized
+      $ref: '#/components/responses/UnauthorizedError'
+    default:
+      $ref: '#/components/responses/GeneralError'
+
