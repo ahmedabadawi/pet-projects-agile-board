@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import java.time.Instant;
 import java.util.Optional;
@@ -79,6 +80,24 @@ public class AuthServiceTest {
         .isInstanceOf(AuthenticationException.class);
   }
 
+  @Test
+  public void invalidLogin_emailNull() {
+    final AuthRepository authRepository = mock(AuthRepository.class);
+    final AuthService service = new AuthService(this.config, this.hashService, authRepository);
+    assertThatThrownBy(() -> service.login(null, USER_PASSWORD))
+        .isInstanceOf(AuthenticationException.class);
+    verifyNoMoreInteractions(authRepository);
+  }
+  
+  @Test
+  public void invalidLogin_passwordNull() {
+    final AuthRepository authRepository = mock(AuthRepository.class);
+    final AuthService service = new AuthService(this.config, this.hashService, authRepository);
+    assertThatThrownBy(() -> service.login(USER_EMAIL, null))
+        .isInstanceOf(AuthenticationException.class);
+    verifyNoMoreInteractions(authRepository);
+  }
+  
   @Test
   public void missingConfig_secret() {
     final String hashedPassword = hashService.hash(USER_PASSWORD);

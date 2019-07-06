@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { concatMap, catchError } from 'rxjs/operators';
 
 import { Credentials } from '../models/credentials.model';
-import {
-  ConfigService,
-  AuthService,
-  ProfileService
-} from '../../core';
+import { LoginUser } from '../models/login-user.model';
+
+import { ConfigService } from '../../core';
 
 @Injectable({
   providedIn: 'root'
@@ -17,32 +15,18 @@ import {
 export class LoginService {
 
   constructor(private config: ConfigService,
-              private http: HttpClient,
-              private authService: AuthService,
-              private profileService: ProfileService) { }
+              private http: HttpClient) { }
 
-  login(credentials: Credentials): Observable<boolean> {
-    return this.http.post<any>(this.config.api + '/api/auth/login', JSON.stringify(credentials))
-      .pipe(concatMap((loginResponse) => {
-        console.log('Succeeded Login - ' + credentials.username);
-        const token = loginResponse.token;
-        const userId = loginResponse.userId;
+  login(credentials: Credentials): Observable<LoginUser> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
 
-        return this.profileService.getUserProfile(userId)
-          .pipe(concatMap(profile => {
-            console.log('Got Profile: ' + profile.firstName);
-            this.authService.login(token, profile);
-            console.log('Logged In - ' + profile.firstName);
-
-            return of(true);
-          }));
-      }),
-      catchError((error) => {
-        console.log(error);
-        console.log(error.status);
-        console.log(error.message);
-        return of(false);
-      }));
+    return this.http.post<LoginUser>(
+      this.config.api + '/api/auth',
+      credentials, httpOptions);
   }
 }
 

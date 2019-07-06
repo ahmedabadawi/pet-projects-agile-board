@@ -36,7 +36,6 @@ export class AuthService {
   }
 
   login(token: string, userProfile: UserProfile) {
-    console.log('User Logged In: ' + userProfile.firstName);
     const user: AuthenticatedUser = {
       token,
       profile: userProfile

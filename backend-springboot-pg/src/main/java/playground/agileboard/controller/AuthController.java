@@ -44,7 +44,7 @@ public class AuthController {
     } catch (final AuthenticationException e) {
       return ResponseEntity.status(401).body(null);
     } catch (RuntimeException e) {
-      LOGGER.error(e.getMessage());
+      LOGGER.error(e.getMessage(), e);
       return ResponseEntity.status(500).body(null);
     }
   }

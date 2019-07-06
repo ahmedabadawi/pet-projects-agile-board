@@ -35,7 +35,7 @@ export class LayoutComponent implements OnInit, OnDestroy {
   }
 
   getAvatar() {
-    return (this.currentUser) ? this.currentUser.avatar : '';
+    return (this.currentUser) ? this.currentUser.photo : '';
   }
 
   getFullName() {

@@ -3,6 +3,6 @@ export interface UserProfile {
   email: string;
   firstName: string;
   lastName: string;
-  avatar: string;
-  role: string;
+  photo: string;
+  bio: string;
 }

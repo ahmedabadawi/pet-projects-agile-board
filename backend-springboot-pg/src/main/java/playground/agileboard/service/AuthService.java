@@ -33,6 +33,11 @@ public class AuthService {
 
   public AuthToken login(final String email, final String password) throws AuthenticationException {
     validateConfig();
+    
+    if (email == null || password == null) {
+      throw new AuthenticationException();
+    }
+    
     final String hashedPassword = hashService.hash(password);
     Optional<LoginUser> loginUser = authRepository.findById(email);
     if (loginUser.isPresent()) {

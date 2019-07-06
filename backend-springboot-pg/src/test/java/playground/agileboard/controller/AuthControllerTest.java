@@ -1,7 +1,9 @@
 package playground.agileboard.controller;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import java.time.Instant;
 import org.junit.Test;
@@ -52,8 +54,11 @@ public class AuthControllerTest {
     mvc.perform(post("/api/auth")
         .contentType(MediaType.APPLICATION_JSON)
         .content(MAPPER.writeValueAsBytes(request)))
-        .andExpect(status().isOk());
-    // TODO: Assert the response details
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.userId", is(userId)))
+        .andExpect(jsonPath("$.token", is(token)));
+        // .andExpect(jsonPath("$.expiresAt", is(expiresAt)));
+    // TODO: Assert the expiresAt with a range matcher
   }
   
   @Test

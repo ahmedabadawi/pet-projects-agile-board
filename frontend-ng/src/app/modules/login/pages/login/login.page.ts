@@ -3,7 +3,14 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
+import {
+  AuthService,
+  ProfileService
+} from '../../../core';
+
 import { LoginService } from '../../services/login.service';
+
+import { LoginUser } from '../../models/login-user.model';
 
 @Component({
   templateUrl: './login.page.html',
@@ -33,7 +40,9 @@ export class LoginPage implements OnInit {
 
   constructor(private router: Router,
               private formBuilder: FormBuilder,
-              private loginService: LoginService) { }
+              private loginService: LoginService,
+              private profileService: ProfileService,
+              private authService: AuthService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -61,23 +70,22 @@ export class LoginPage implements OnInit {
 
   login() {
     this.loginService.login({
-      username: this.userLoginForm.value.email,
+      email: this.userLoginForm.value.email,
       password: this.userLoginForm.value.password
-      })
-      .pipe(first())
-      .subscribe(
-        response => {
-          console.log(response);
-          if (response) {
-            this.loginFailed = false;
-            this.router.navigate(['/']);
-          } else {
-            this.loginFailed = true;
-            console.log('Login failed');
-          }
+      }).subscribe(
+        (loginUser: LoginUser) => {
+          this.profileService.getUserProfile(loginUser.userId)
+            .subscribe(
+              (profile) => {
+                this.authService.login(loginUser.token, profile);
+                this.loginFailed = false;
+                this.router.navigate(['/']);
+              },
+              (error) => {
+                this.loginFailed = true;
+              });
         },
         error => {
-          console.log(error);
           this.loginFailed = true;
         });
   }
