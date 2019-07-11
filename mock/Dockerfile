@@ -8,7 +8,7 @@ RUN mkdir -p /var/wiremock \
 
 WORKDIR /home/wiremock
 
-COPY mappings /home/wiremock/mappings
+VOLUME /home/wiremock/mappings
 
 EXPOSE 8080 8443
 
