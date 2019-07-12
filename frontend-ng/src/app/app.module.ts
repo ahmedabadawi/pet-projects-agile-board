@@ -18,8 +18,6 @@ import { AdminModule } from './modules/admin/admin.module';
 import { LayoutComponent } from './modules/shared';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-// import { ServicesStubInterceptor } from './modules/core/interceptors';
-
 @NgModule({
   declarations: [
     AppComponent
@@ -40,7 +38,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
-    // { provide: HTTP_INTERCEPTORS, useClass: ServicesStubInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })
