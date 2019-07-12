@@ -25,8 +25,8 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { UserNewComponent } from './components/user-new/user-new.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
-import { AdminHomePage } from './pages/admin-home/admin-home.page';
-import { UserDetailsPage } from './pages/user-details/user-details.page';
+import { AdminHomePageComponent } from './pages/admin-home/admin-home-page.component';
+import { UserDetailsPageComponent } from './pages/user-details/user-details-page.component';
 
 import { UsersService } from './services/users.service';
 
@@ -35,9 +35,9 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: AdminHomePage },
-      { path: 'user', component: UserDetailsPage },
-      { path: 'user/:userId', component: UserDetailsPage },
+      { path: '', component: AdminHomePageComponent },
+      { path: 'user', component: UserDetailsPageComponent },
+      { path: 'user/:userId', component: UserDetailsPageComponent },
       { path: '**', redirectTo: '' }
     ]
   }
@@ -69,7 +69,7 @@ const routes: Routes = [
   declarations: [
     LayoutComponent,
     UserNewComponent, UsersListComponent, UserDetailsComponent,
-    AdminHomePage, UserDetailsPage
+    AdminHomePageComponent, UserDetailsPageComponent
   ],
   providers: [ UsersService ]
 })

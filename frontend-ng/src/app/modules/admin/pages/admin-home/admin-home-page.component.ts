@@ -3,10 +3,10 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { User } from '../../models/user.model';
 
 @Component({
-  templateUrl: './admin-home.page.html',
-  styleUrls: ['./admin-home.page.scss']
+  templateUrl: './admin-home-page.component.html',
+  styleUrls: ['./admin-home-page.component.scss']
 })
-export class AdminHomePage implements OnInit {
+export class AdminHomePageComponent implements OnInit {
 
   selectedUsers: SelectionModel<User>;
 

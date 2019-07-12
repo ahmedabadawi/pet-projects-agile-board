@@ -11,7 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { SharedModule } from '../shared';
 
 import { LayoutComponent } from './components/layout/layout.component';
-import { LoginPage } from './pages/login/login.page';
+import { LoginPageComponent } from './pages/login/login-page.component';
 import { LoginService } from './services/login.service';
 
 const routes: Routes = [
@@ -19,7 +19,7 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: LoginPage },
+      { path: '', component: LoginPageComponent },
       { path: '**', redirectTo: '' }
     ]
   }
@@ -40,7 +40,7 @@ const routes: Routes = [
   ],
   exports: [ RouterModule ],
   declarations: [
-    LayoutComponent, LoginPage
+    LayoutComponent, LoginPageComponent
   ],
   providers: [ LoginService ]
 })

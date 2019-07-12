@@ -13,10 +13,10 @@ import { LoginService } from '../../services/login.service';
 import { LoginUser } from '../../models/login-user.model';
 
 @Component({
-  templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss']
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.scss']
 })
-export class LoginPage implements OnInit {
+export class LoginPageComponent implements OnInit {
   userLoginForm: FormGroup;
   formErrors = {
     email: '',

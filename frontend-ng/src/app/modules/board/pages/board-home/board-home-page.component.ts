@@ -5,10 +5,10 @@ import { BoardService } from '../../services/board.service';
 import { Item } from '../../models/item.model';
 
 @Component({
-  templateUrl: './board-home.page.html',
-  styleUrls: ['./board-home.page.scss']
+  templateUrl: './board-home-page.component.html',
+  styleUrls: ['./board-home-page.component.scss']
 })
-export class BoardHomePage implements OnInit {
+export class BoardHomePageComponent implements OnInit {
   backlogItems: Array<Item> = [];
   blockedItems: Array<Item> = [];
   inProgressItems: Array<Item> = [];

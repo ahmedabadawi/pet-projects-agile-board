@@ -6,10 +6,10 @@ import { take } from 'rxjs/operators';
 import { User } from '../../models/user.model';
 
 @Component({
-  templateUrl: './user-details.page.html',
-  styleUrls: ['./user-details.page.scss']
+  templateUrl: './user-details-page.component.html',
+  styleUrls: ['./user-details-page.component.scss']
 })
-export class UserDetailsPage implements OnInit {
+export class UserDetailsPageComponent implements OnInit {
   userId?: any;
   user: User;
 

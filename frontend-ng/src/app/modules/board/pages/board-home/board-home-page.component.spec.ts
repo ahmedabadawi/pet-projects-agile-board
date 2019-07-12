@@ -6,12 +6,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { BoardHomePage } from './board-home.page';
+import { BoardHomePageComponent } from './board-home-page.component';
 import { BoardItemComponent } from '../../components/board-item/board-item.component';
 
-describe('BoardHomePage', () => {
-  let component: BoardHomePage;
-  let fixture: ComponentFixture<BoardHomePage>;
+describe('BoardHomePageComponent', () => {
+  let component: BoardHomePageComponent;
+  let fixture: ComponentFixture<BoardHomePageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,13 +22,13 @@ describe('BoardHomePage', () => {
         MatSnackBarModule,
         MatToolbarModule
       ],
-      declarations: [ BoardHomePage, BoardItemComponent ]
+      declarations: [ BoardHomePageComponent, BoardItemComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BoardHomePage);
+    fixture = TestBed.createComponent(BoardHomePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

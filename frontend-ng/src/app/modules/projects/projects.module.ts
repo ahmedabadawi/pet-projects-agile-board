@@ -5,14 +5,14 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared';
 
 import { LayoutComponent } from './components/layout/layout.component';
-import { ProjectsPage } from './pages/projects/projects.page';
+import { ProjectsPageComponent } from './pages/projects/projects-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: ProjectsPage },
+      { path: '', component: ProjectsPageComponent },
       { path: '**', redirectTo: '' }
     ]
   }
@@ -26,7 +26,7 @@ const routes: Routes = [
   ],
   exports: [ RouterModule ],
   declarations: [
-    LayoutComponent, ProjectsPage
+    LayoutComponent, ProjectsPageComponent
   ],
   providers: []
 })

@@ -39,7 +39,7 @@ export class ServicesStubInterceptor implements HttpInterceptor {
     } else if (request.url.includes(PROJECTS_API)) {
       return this.projectsStubs.handle(this.extractEndpoint(PROJECTS_API, request.url), request);
     } else if (request.url.includes(ADMIN_API)) {
-      return this.adminStubs.handle(this.extractEndpoint(ADMIN_API, request.url),request);
+      return this.adminStubs.handle(this.extractEndpoint(ADMIN_API, request.url), request);
     }
     console.log(request.url);
     return next.handle(request);

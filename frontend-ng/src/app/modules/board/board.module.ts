@@ -14,14 +14,14 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { BoardItemComponent } from './components/board-item/board-item.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 
-import { BoardHomePage } from './pages/board-home/board-home.page';
+import { BoardHomePageComponent } from './pages/board-home/board-home-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: BoardHomePage },
+      { path: '', component: BoardHomePageComponent },
       { path: '**', redirectTo: '' }
     ]
   }
@@ -42,7 +42,8 @@ const routes: Routes = [
   ],
   exports: [ RouterModule ],
   declarations: [
-    LayoutComponent, BoardItemComponent, ItemDetailsComponent, BoardHomePage
+    LayoutComponent, BoardItemComponent, ItemDetailsComponent,
+    BoardHomePageComponent
   ],
   providers: []
 })

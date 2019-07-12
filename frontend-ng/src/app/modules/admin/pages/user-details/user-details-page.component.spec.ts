@@ -3,21 +3,18 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatTableModule } from '@angular/material/table';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { AdminHomePage } from './admin-home.page';
-import { UsersListComponent } from '../../components/users-list/users-list.component';
+import { UserDetailsPageComponent } from './user-details-page.component';
+import { UserNewComponent } from '../../components/user-new/user-new.component';
+import { UserDetailsComponent } from '../../components/user-details/user-details.component';
 
-describe('AdminHomePage', () => {
-  let component: AdminHomePage;
-  let fixture: ComponentFixture<AdminHomePage>;
+describe('UserDetailsPageComponent', () => {
+  let component: UserDetailsPageComponent;
+  let fixture: ComponentFixture<UserDetailsPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,22 +24,18 @@ describe('AdminHomePage', () => {
         FormsModule,
         ReactiveFormsModule,
 
-        MatCheckboxModule,
         MatFormFieldModule,
         MatInputModule,
-        MatIconModule,
-        MatPaginatorModule,
-        MatTableModule,
-        MatTabsModule,
+        MatSnackBarModule,
         MatToolbarModule
       ],
-      declarations: [ AdminHomePage, UsersListComponent ]
+      declarations: [ UserDetailsPageComponent, UserNewComponent, UserDetailsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AdminHomePage);
+    fixture = TestBed.createComponent(UserDetailsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
