@@ -1,5 +1,5 @@
 # Agile-Board
-=============
+~~~~~~~~~~~~~
 The idea is a pet project to practice different techniques and technologies in a non-trivial but yet not too complicated software.
 The project will have a single repository with all different stacks.
 
