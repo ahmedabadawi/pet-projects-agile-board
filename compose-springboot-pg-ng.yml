@@ -1,0 +1,40 @@
+##################################
+# Stack:                         #
+# Backend: Springboot (Monolith) #
+# Datbase: Postgres              #
+# Frontend: Angular              #
+# ################################
+
+version: '3.7'
+services:
+  dev-agileboard-backend:
+    image: agileboard-backend:springboot
+    ports:
+      - 8080:8080
+    depends_on:
+      - dev-agileboard-db
+    networks:
+      - dev-agileboard
+  dev-agileboard-db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: Password123
+      POSTGRES_DB: dev-agileboard
+    ports:
+      - 5432:5432
+    volumes:
+      - dev-psql-agileboard:/var/lib/postgresql/data
+    networks: 
+      - dev-agileboard
+  dev-agileboard-frontend:
+    image: agileboard-frontend:ng
+    ports:
+      - 88:80
+    volumes:
+      - ./frontend-ng/dist/agile-board-ui:/usr/share/nginx/html
+    networks:
+      - dev-agileboard
+volumes:
+  dev-psql-agileboard:
+networks:
+  dev-agileboard:
