@@ -1,10 +1,8 @@
 # Agile-Board
-~~~~~~~~~~~~~
 The idea is a pet project to practice different techniques and technologies in a non-trivial but yet not too complicated software.
 The project will have a single repository with all different stacks.
 
 ## Technologies
-~~~~~~~~~~~~~~~
 - Java 8 
 - SpringBoot
 - Postgres
@@ -12,7 +10,6 @@ The project will have a single repository with all different stacks.
 - Angular Material 
 
 ## Features and High-level Stories
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### Authentication
 Allow users to login/logout and keep track of login audits.
