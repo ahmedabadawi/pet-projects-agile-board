@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  api: 'http://localhost:8080'	// TODO: The static IP will be updated when the frontend is dockerized
+  api: ''
 };
 
 /*
