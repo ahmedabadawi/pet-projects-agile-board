@@ -12,6 +12,9 @@ import { LoginService } from '../../services/login.service';
 
 import { LoginUser } from '../../models/login-user.model';
 
+import { ConfigService } from '../../../core';
+import { LogService } from '../../../core';
+
 @Component({
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.scss']
@@ -42,7 +45,9 @@ export class LoginPageComponent implements OnInit {
               private formBuilder: FormBuilder,
               private loginService: LoginService,
               private profileService: ProfileService,
-              private authService: AuthService) { }
+              private authService: AuthService,
+              private config: ConfigService,
+              private log: LogService) { }
 
   ngOnInit() {
     this.buildForm();
@@ -82,10 +87,12 @@ export class LoginPageComponent implements OnInit {
                 this.router.navigate(['/']);
               },
               (error) => {
+                this.log.error(`Failed to retrieve User Profile ${loginUser.userId} - ${error}`);
                 this.loginFailed = true;
               });
         },
-        error => {
+        (error) => {
+          this.log.error(`Failed to Login - ${this.userLoginForm.value.email} - ${error}`);
           this.loginFailed = true;
         });
   }

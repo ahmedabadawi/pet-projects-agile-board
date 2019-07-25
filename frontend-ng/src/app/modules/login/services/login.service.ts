@@ -8,6 +8,7 @@ import { Credentials } from '../models/credentials.model';
 import { LoginUser } from '../models/login-user.model';
 
 import { ConfigService } from '../../core';
+import { LogService } from '../../core';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,11 @@ import { ConfigService } from '../../core';
 export class LoginService {
 
   constructor(private config: ConfigService,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private log: LogService) { }
 
   login(credentials: Credentials): Observable<LoginUser> {
+    this.log.debug(`Login Attempt for user ${credentials.email}`);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -27,6 +30,7 @@ export class LoginService {
     return this.http.post<LoginUser>(
       this.config.api + '/api/auth',
       credentials, httpOptions);
+    // TODO: Catch and Log HTTP Errors
   }
 }
 

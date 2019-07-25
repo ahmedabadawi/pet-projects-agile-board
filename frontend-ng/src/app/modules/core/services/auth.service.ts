@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 
 import { ConfigService } from './config.service';
+import { LogService } from './log.service';
 
 import { AuthenticatedUser } from '../models/authenticated-user.model';
 import { UserProfile } from '../models/user-profile.model';
@@ -15,7 +16,8 @@ export class AuthService {
   public currentUser: Observable<AuthenticatedUser>;
   private currentUserEmitter: BehaviorSubject<AuthenticatedUser>;
 
-  constructor(private config: ConfigService) {
+  constructor(private config: ConfigService,
+              private log: LogService) {
     this.currentUserEmitter =
       new BehaviorSubject<AuthenticatedUser>(
         this.loadCurrentUser());
@@ -36,6 +38,8 @@ export class AuthService {
   }
 
   login(token: string, userProfile: UserProfile) {
+    this.log.debug(`User ${userProfile.id} Logged In`);
+
     const user: AuthenticatedUser = {
       token,
       profile: userProfile
