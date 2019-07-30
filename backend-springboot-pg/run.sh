@@ -1,8 +1,8 @@
 #!/bin/bash
 NETWORK_NAME=dev-agileboard
-DB_NAME=dev-agileboard
+DB_NAME=agileboard
 DB_PASSWORD=Password123
-DB=dev-agileboard-db
+DB=db
 BACKEND=dev-agileboard-backend
 docker network create $NETWORK_NAME
 docker container run --rm --name $DB \

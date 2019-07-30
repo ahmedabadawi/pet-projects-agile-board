@@ -6,44 +6,37 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { SharedModule } from '../shared';
 
-import { LayoutComponent } from './components/layout/layout.component';
 import { BoardItemComponent } from './components/board-item/board-item.component';
 import { ItemDetailsComponent } from './components/item-details/item-details.component';
 
-import { BoardHomePageComponent } from './pages/board-home/board-home-page.component';
+import { BoardComponent } from './components/board/board.component';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: LayoutComponent,
-    children: [
-      { path: '', component: BoardHomePageComponent },
-      { path: '**', redirectTo: '' }
-    ]
-  }
-];
+import { BoardRoutingModule } from './board-routing.module';
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
     CommonModule,
 
     MatButtonModule,
     MatCardModule,
     MatIconModule,
     MatListModule,
+    MatSnackBarModule,
     MatToolbarModule,
 
-    SharedModule
+    SharedModule,
+
+    BoardRoutingModule,
   ],
   exports: [ RouterModule ],
   declarations: [
-    LayoutComponent, BoardItemComponent, ItemDetailsComponent,
-    BoardHomePageComponent
+    BoardItemComponent, ItemDetailsComponent,
+    BoardComponent
   ],
   providers: []
 })

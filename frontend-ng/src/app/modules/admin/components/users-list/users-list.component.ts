@@ -15,8 +15,6 @@ import { UsersService } from '../../services/users.service';
   styleUrls: [ './users-list.component.scss' ]
 })
 export class UsersListComponent implements OnInit {
-  @Output() selectionChanged: EventEmitter<SelectionModel<User>> = new EventEmitter<SelectionModel<User>>();
-
   displayedColumns = [ 'select', 'userId', 'email', 'firstName', 'lastName', 'lastLogin' ];
   dataSource: MatTableDataSource<User>;
   selection = new SelectionModel<User>(true, []);
@@ -50,7 +48,6 @@ export class UsersListComponent implements OnInit {
 
   selectUser(row: User) {
     this.selection.toggle(row);
-    this.selectionChanged.next(this.selection);
   }
 
   isAllSelected() {
@@ -63,7 +60,6 @@ export class UsersListComponent implements OnInit {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.data.forEach(row => this.selection.select(row));
-    this.selectionChanged.next(this.selection);
   }
 
   checkboxLabel(row?: User): string {

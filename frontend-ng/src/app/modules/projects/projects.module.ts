@@ -4,29 +4,20 @@ import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared';
 
-import { LayoutComponent } from './components/layout/layout.component';
-import { ProjectsPageComponent } from './pages/projects/projects-page.component';
+import { ProjectsComponent } from './components/projects/projects.component';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: LayoutComponent,
-    children: [
-      { path: '', component: ProjectsPageComponent },
-      { path: '**', redirectTo: '' }
-    ]
-  }
-];
+import { ProjectsRoutingModule } from './projects-routing.module';
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
     CommonModule,
-    SharedModule
+    SharedModule,
+
+    ProjectsRoutingModule,
   ],
   exports: [ RouterModule ],
   declarations: [
-    LayoutComponent, ProjectsPageComponent
+    ProjectsComponent
   ],
   providers: []
 })

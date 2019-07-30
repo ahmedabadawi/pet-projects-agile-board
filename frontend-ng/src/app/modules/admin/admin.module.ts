@@ -21,31 +21,17 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared';
 
 
-import { LayoutComponent } from './components/layout/layout.component';
+import { AdminComponent } from './components/admin/admin.component';
 import { UserNewComponent } from './components/user-new/user-new.component';
 import { UserDetailsComponent } from './components/user-details/user-details.component';
 import { UsersListComponent } from './components/users-list/users-list.component';
-import { AdminHomePageComponent } from './pages/admin-home/admin-home-page.component';
-import { UserDetailsPageComponent } from './pages/user-details/user-details-page.component';
 
 import { UsersService } from './services/users.service';
 
-const routes: Routes = [
-  {
-    path: '',
-    component: LayoutComponent,
-    children: [
-      { path: '', component: AdminHomePageComponent },
-      { path: 'user', component: UserDetailsPageComponent },
-      { path: 'user/:userId', component: UserDetailsPageComponent },
-      { path: '**', redirectTo: '' }
-    ]
-  }
-];
+import { AdminRoutingModule } from './admin-routing.module';
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes),
     CommonModule,
     SharedModule,
     FormsModule,
@@ -63,13 +49,14 @@ const routes: Routes = [
     MatTabsModule,
     MatTableModule,
     MatToolbarModule,
-    MatTooltipModule
+    MatTooltipModule,
+
+    AdminRoutingModule,
   ],
   exports: [ RouterModule ],
   declarations: [
-    LayoutComponent,
-    UserNewComponent, UsersListComponent, UserDetailsComponent,
-    AdminHomePageComponent, UserDetailsPageComponent
+    AdminComponent,
+    UserNewComponent, UsersListComponent, UserDetailsComponent
   ],
   providers: [ UsersService ]
 })

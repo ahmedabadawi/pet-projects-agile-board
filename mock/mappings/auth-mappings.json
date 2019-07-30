@@ -4,7 +4,7 @@
       "priority": 1,
       "request": {
         "method": "POST",
-        "url": "/api/auth/login",
+        "url": "/api/auth",
         "bodyPatterns": [ {
           "equalToJson": { "username": "admin@corp.com", "password": "Password1234"}
           }]
@@ -30,7 +30,7 @@
       "priority": 5,
       "request": {
         "method": "POST",
-        "url": "/api/auth/login"
+        "url": "/api/auth"
       },
       "response": {
         "status": 401,
