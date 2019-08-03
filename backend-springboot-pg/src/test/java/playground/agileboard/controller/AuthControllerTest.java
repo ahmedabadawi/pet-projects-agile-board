@@ -5,20 +5,19 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import java.time.Instant;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import playground.agileboard.controller.dto.Credentials;
-import playground.agileboard.model.AuthToken;
+import playground.agileboard.model.LoginUser;
 import playground.agileboard.repository.AuthRepository;
 import playground.agileboard.repository.ProjectMemberRepository;
 import playground.agileboard.repository.ProjectRepository;
@@ -26,12 +25,14 @@ import playground.agileboard.repository.UserProfileRepository;
 import playground.agileboard.repository.UserRepository;
 import playground.agileboard.repository.WorkItemRepository;
 import playground.agileboard.service.AuthService;
-import playground.agileboard.service.AuthenticationException;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(AuthController.class)
 public class AuthControllerTest {
   private static ObjectMapper MAPPER = new ObjectMapper();
+  
+  @Autowired
+  private PasswordEncoder passwordEncoder;
   
   @Autowired
   private MockMvc mvc;
@@ -45,18 +46,15 @@ public class AuthControllerTest {
     request.setEmail("admin@corp.com");
     request.setPassword("Password123");
     final Integer userId = 999;
-    final String token = "TEST_TOKEN";
-    final Instant expiresAt = Instant.now();
     
-    when(authService.login(request.getEmail(), request.getPassword()))
-      .thenReturn(new AuthToken(userId,token, expiresAt));
+    when(authService.loadUserByUsername(request.getEmail()))
+      .thenReturn(new LoginUser(request.getEmail(), passwordEncoder.encode(request.getPassword()), userId, "ADMIN,USER"));
     
-    mvc.perform(post("/api/auth")
+    mvc.perform(post("/auth/login")
         .contentType(MediaType.APPLICATION_JSON)
         .content(MAPPER.writeValueAsBytes(request)))
         .andExpect(status().isOk())
-        .andExpect(jsonPath("$.userId", is(userId)))
-        .andExpect(jsonPath("$.token", is(token)));
+        .andExpect(jsonPath("$.userId", is(userId)));
         // .andExpect(jsonPath("$.expiresAt", is(expiresAt)));
     // TODO: Assert the expiresAt with a range matcher
   }
@@ -67,8 +65,8 @@ public class AuthControllerTest {
     request.setEmail("admin@corp.com");
     request.setPassword("Password123");
     
-    when(authService.login(request.getEmail(), request.getPassword()))
-      .thenThrow(new AuthenticationException());
+    when(authService.loadUserByUsername(request.getEmail()))
+      .thenThrow(new UsernameNotFoundException("User is not found"));
     
     mvc.perform(post("/api/auth")
         .contentType(MediaType.APPLICATION_JSON)

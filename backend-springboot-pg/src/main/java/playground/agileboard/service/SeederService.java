@@ -4,8 +4,8 @@ import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RestController;
 import playground.agileboard.model.LoginUser;
 import playground.agileboard.model.Project;
 import playground.agileboard.model.ProjectMember;
@@ -21,7 +21,7 @@ import playground.agileboard.repository.WorkItemRepository;
 
 @Service
 public class SeederService {
-  private HashService hashService;
+  private PasswordEncoder passwordEncoder;
 
   private UserRepository userRepository;
   private AuthRepository authRepository;
@@ -31,12 +31,12 @@ public class SeederService {
   private WorkItemRepository workItemRepository;
   
   @Autowired
-  public SeederService(HashService hashService, UserRepository userRepository,
+  public SeederService(PasswordEncoder passwordEncoder, UserRepository userRepository,
       AuthRepository authRepository, UserProfileRepository profileRepository,
       ProjectRepository projectRepository, ProjectMemberRepository memberRepository,
       WorkItemRepository workItemRepository) {
 
-    this.hashService = hashService;
+    this.passwordEncoder = passwordEncoder;
 
     this.userRepository = userRepository;
     this.authRepository = authRepository;
@@ -53,10 +53,13 @@ public class SeederService {
   }
 
   private void seedUsers() {
-    final String passwordHash = hashService.hash(DEFAULT_PASSWORD);
+    final String passwordHash = passwordEncoder.encode(DEFAULT_PASSWORD);
     for (final User user : USERS) {
+      final String userRoles = "USER";
+      final String adminRoles = "ADMIN,USER";
       userRepository.save(user);
-      authRepository.save(new LoginUser(user.getEmail(), passwordHash, user.getId()));
+      authRepository.save(new LoginUser(user.getEmail(), passwordHash, user.getId(), 
+          user.getEmail().equals("admin@corp.com") ? adminRoles : userRoles));
       profileRepository.save(new UserProfile(user.getId(), user.getEmail(), user.getFirstName(),
           user.getLastName(), PHOTO_URL, DEFAULT_BIO));
     }

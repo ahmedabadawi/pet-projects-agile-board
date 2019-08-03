@@ -24,7 +24,8 @@ public class AuthRepositoryTest {
     final String email = "admin@corp.com";
     final String passwordHash = "ABCDEF0123456789";
     final Integer userId = 999;
-    final LoginUser testUser = new LoginUser(email, passwordHash, userId);
+    final String roles = "ADMIN,USER";
+    final LoginUser testUser = new LoginUser(email, passwordHash, userId, roles);
     entityManager.persist(testUser);
     entityManager.flush();
     
