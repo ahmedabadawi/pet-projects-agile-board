@@ -14,10 +14,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 
 @Entity
-@Table(name = "AuthUser")
+@Table(name = "auth_user")
 public class LoginUser implements UserDetails {
   @Id
-  private String username;
+  private String email;
   private String password;
   private Integer userId;
   private String roles;
@@ -25,9 +25,9 @@ public class LoginUser implements UserDetails {
   public LoginUser() {}
 
 
-  public LoginUser(final String username, final String password, final Integer userId, final String roles) {
+  public LoginUser(final String email, final String password, final Integer userId, final String roles) {
 
-    this.username = username;
+    this.email = email;
     this.password = password;
     this.userId = userId;
     this.roles = roles;
@@ -44,11 +44,11 @@ public class LoginUser implements UserDetails {
 
   @Override
   public String getUsername() {
-    return username;
+    return email;
   }
 
   public void setUsername(final String username) {
-    this.username = username;
+    this.email = username;
   }
 
   @Override
