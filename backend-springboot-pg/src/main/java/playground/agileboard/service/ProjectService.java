@@ -1,5 +1,12 @@
 package playground.agileboard.service;
 
-public class ProjectService {
+import java.util.List;
+import org.springframework.stereotype.Service;
+import playground.agileboard.model.Project;
+
+@Service
+public interface ProjectService {
+
+  List<Project> getProjects();
 
 }

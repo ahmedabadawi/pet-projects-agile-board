@@ -17,7 +17,6 @@ import playground.agileboard.controller.dto.AuthToken;
 import playground.agileboard.controller.dto.Credentials;
 import playground.agileboard.model.LoginUser;
 import playground.agileboard.security.JwtEncoder;
-import playground.agileboard.service.AuthService;
 
 @RestController
 public class AuthController {
@@ -27,16 +26,13 @@ public class AuthController {
   
   private final AuthenticationManager authenticationManager;
   
-  private final AuthService authService;
-  
   private final JwtEncoder jwtEncoder;
   
   @Autowired
-  public AuthController(final AuthService authService, final JwtEncoder jwtEncoder,
-      final AuthenticationManager authenticationManager) {
-    this.authService = authService;
-    this.jwtEncoder = jwtEncoder;
+  public AuthController(final AuthenticationManager authenticationManager, 
+                        final JwtEncoder jwtEncoder) { 
     this.authenticationManager = authenticationManager;
+    this.jwtEncoder = jwtEncoder;
   }
   
   @RequestMapping(

@@ -17,17 +17,15 @@ import playground.agileboard.service.SeederService;
 public class TestController {
   private Logger LOG = LoggerFactory.getLogger(TestController.class);
   
-  private final UserRepository userRepository;
-  private final SeederService seeder;
+  @Autowired
+  private UserRepository userRepository;
+  @Autowired
+  private SeederService seeder;
   
   @Autowired
   private AuthService authService;
   
-  @Autowired
-  public TestController(final UserRepository userRepository, final SeederService seeder) {
-    this.userRepository = userRepository;
-    this.seeder = seeder;
-  }
+  public TestController() {}
   
   @RequestMapping("/")
   public String test() {

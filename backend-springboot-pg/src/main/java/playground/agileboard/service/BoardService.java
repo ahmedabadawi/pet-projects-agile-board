@@ -1,5 +1,8 @@
 package playground.agileboard.service;
 
-public class BoardService {
+import org.springframework.stereotype.Service;
+
+@Service
+public interface BoardService {
 
 }

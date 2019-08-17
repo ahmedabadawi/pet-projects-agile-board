@@ -7,7 +7,12 @@ public class ProjectsList {
   private List<Project> projects;
   
   public ProjectsList() {}
-
+  
+  public ProjectsList(final List<Project> projects) {
+    this.projects = projects;
+    this.total = projects.size();
+  }
+  
   public Integer getTotal() {
     return total;
   }

@@ -5,7 +5,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.fail;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 import java.util.Optional;
 import org.junit.Before;
@@ -37,7 +36,7 @@ public class AuthServiceTest {
     when(authRepository.findById(eq(USER_EMAIL)))
         .thenReturn(Optional.of(new LoginUser(USER_EMAIL, hashedPassword, USER_ID, USER_ROLES)));
 
-    final AuthService service = new AuthService(authRepository, passwordEncoder);
+    final AuthServiceImpl service = new AuthServiceImpl(authRepository, passwordEncoder);
     try {
       final UserDetails actual = service.loadUserByUsername(USER_EMAIL);
       assertThat(actual).isNotNull().isInstanceOf(LoginUser.class);
@@ -54,7 +53,7 @@ public class AuthServiceTest {
   public void invalidLogin_emailDoesNotExist() {
     final AuthRepository authRepository = mock(AuthRepository.class);
     when(authRepository.findById(eq(USER_EMAIL))).thenReturn(Optional.empty());
-    final AuthService service = new AuthService(authRepository, passwordEncoder);
+    final AuthServiceImpl service = new AuthServiceImpl(authRepository, passwordEncoder);
     assertThatThrownBy(() -> service.loadUserByUsername(USER_EMAIL))
         .isInstanceOf(UsernameNotFoundException.class);
   }
@@ -62,7 +61,7 @@ public class AuthServiceTest {
   @Test
   public void invalidLogin_emailNull() {
     final AuthRepository authRepository = mock(AuthRepository.class);
-    final AuthService service = new AuthService(authRepository, passwordEncoder);
+    final AuthServiceImpl service = new AuthServiceImpl(authRepository, passwordEncoder);
     assertThatThrownBy(() -> service.loadUserByUsername(null))
         .isInstanceOf(UsernameNotFoundException.class);
   }

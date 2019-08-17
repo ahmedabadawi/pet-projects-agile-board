@@ -14,7 +14,6 @@ import playground.agileboard.controller.dto.UserProfile;
 public class ProfileController {
   private static final Logger LOGGER = LoggerFactory.getLogger(ProfileController.class);
   
-  @Autowired
   public ProfileController() {}
   
   @RequestMapping(

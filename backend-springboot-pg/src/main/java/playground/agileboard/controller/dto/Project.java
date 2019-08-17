@@ -13,6 +13,19 @@ public class Project {
   
   public Project() {}
 
+ 
+  public Project(Integer id, String code, String title, String description, Instant startDate,
+      Instant endDate, Integer adminId) {
+    super();
+    this.id = id;
+    this.code = code;
+    this.title = title;
+    this.description = description;
+    this.startDate = startDate;
+    this.endDate = endDate;
+    this.adminId = adminId;
+  }
+
   public Integer getId() {
     return id;
   }
@@ -67,5 +80,11 @@ public class Project {
 
   public void setAdminId(Integer adminId) {
     this.adminId = adminId;
+  }
+  
+  public static Project fromModel(final playground.agileboard.model.Project project) {
+    return new Project(
+        project.getId(), project.getCode(), project.getTitle(), project.getDescription(), 
+        project.getStartDate(), project.getEndDate(), project.getAdminId());
   }
 }

@@ -20,3 +20,7 @@ VALUES 	(1, 'admin@corp.com', 'John', 'Doe', 'https://placeimg.com/200/200/peopl
         (4, 'orci@augueeu.net', 'Yardley', 'Micah', 'https://placeimg.com/200/200/people','Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
         (5, 'id@interdumlibero.co.uk', 'Hedwig', 'Tate', 'https://placeimg.com/200/200/people', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'),
         (6, 'vitae.sodales@liberonecligula.ca', 'Samuel', 'Kuame', 'https://placeimg.com/200/200/people', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.');
+        
+INSERT INTO public.project (id, admin_id, code, title, description, start_date, end_date)
+VALUES	(1, 1, 'XYZ', 'Project XYZ', 'Lorem Ipsum XYZ', '2018-01-01T00:00:00.00Z', '2022-01-01T00:00:00.00Z'),
+      	(2, 1, 'ABC', 'Project ABC', 'Lorem Ipsum ABC', '2018-01-01T00:00:00.00Z', '2022-01-01T00:00:00.00Z');
