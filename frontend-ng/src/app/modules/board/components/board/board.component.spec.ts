@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { BoardComponent } from './board-home-page.component';
+import { BoardComponent } from './board.component';
 import { BoardItemComponent } from '../../components/board-item/board-item.component';
 
 describe('BoardComponent', () => {
