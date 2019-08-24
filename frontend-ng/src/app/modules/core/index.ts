@@ -7,3 +7,5 @@ export * from './services/config.service';
 export * from './services/log.service';
 
 export * from './guards/auth.guard';
+
+export * from './interceptors/auth.interceptor';

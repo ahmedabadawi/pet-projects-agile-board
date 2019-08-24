@@ -79,7 +79,7 @@ export class LoginComponent implements OnInit {
       password: this.userLoginForm.value.password
       }).subscribe(
         (loginUser: LoginUser) => {
-          this.profileService.getUserProfile(loginUser.userId)
+          this.profileService.getUserProfile(loginUser.userId, loginUser.token)
             .subscribe(
               (profile) => {
                 this.authService.login(loginUser.token, profile);

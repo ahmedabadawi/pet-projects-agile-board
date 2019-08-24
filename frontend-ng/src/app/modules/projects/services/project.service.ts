@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { of } from 'rxjs';
 import { concatMap, catchError } from 'rxjs/operators';
 
-import { Credentials } from '../models/credentials.model';
-import { LoginUser } from '../models/login-user.model';
+import { ProjectsList } from '../models/project.model';
 
 import { ConfigService } from '../../core';
 import { LogService } from '../../core';
@@ -13,23 +12,23 @@ import { LogService } from '../../core';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class ProjectService {
 
   constructor(private config: ConfigService,
               private http: HttpClient,
               private log: LogService) { }
 
-  login(credentials: Credentials): Observable<LoginUser> {
-    this.log.debug(`Login Attempt for user ${credentials.email}`);
+  /* tslint:disable: object-literal-key-quotes */
+  getProjects(): Observable<ProjectsList> {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Accept': 'application/json'
       })
     };
 
-    return this.http.post<LoginUser>(
-      this.config.api + '/auth/login',
-      credentials, httpOptions);
+    return this.http.get<ProjectsList>(
+      this.config.api + '/api/projects',
+      httpOptions);
     // TODO: Catch and Log HTTP Errors
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 import { ConfigService } from './config.service';
@@ -16,8 +16,16 @@ export class ProfileService {
               private http: HttpClient,
               private log: LogService) { }
 
-  getUserProfile(id: number): Observable<UserProfile> {
+  /* tslint:disable: object-literal-key-quotes */
+  getUserProfile(id: number, token: string): Observable<UserProfile> {
     this.log.debug(`getUserProfile(${id})`);
-    return this.http.get<UserProfile>(`${this.config.api}/api/profile/${id}`);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`, // TODO: Refactor the login to be separate from retrieving the user profile
+        'Accept': 'application/json'
+      })
+    };
+    return this.http.get<UserProfile>(`${this.config.api}/api/profile/${id}`,
+      httpOptions);
   }
 }

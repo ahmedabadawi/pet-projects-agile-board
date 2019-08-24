@@ -17,6 +17,8 @@ import { AuthModule } from './modules/auth/auth.module';
 // import { BoardModule } from './modules/board/board.module';
 // import { AdminModule } from './modules/admin/admin.module';
 
+import { AuthInterceptor } from './modules/core/';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -35,6 +37,7 @@ import { AuthModule } from './modules/auth/auth.module';
   ],
   providers: [
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   declarations: [
     AppComponent,

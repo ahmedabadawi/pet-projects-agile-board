@@ -37,6 +37,10 @@ export class AuthService {
     return this.currentUserEmitter.value != null;
   }
 
+  public getToken(): string {
+    return this.currentUserEmitter.value.token;
+  }
+
   login(token: string, userProfile: UserProfile) {
     this.log.debug(`User ${userProfile.id} Logged In`);
 
