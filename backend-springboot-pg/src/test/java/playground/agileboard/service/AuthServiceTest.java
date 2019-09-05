@@ -21,7 +21,8 @@ public class AuthServiceTest {
   private static final String USER_EMAIL = "admin@corp.com";
   private static final String USER_PASSWORD = "Password123";
   private static final String USER_ROLES = "ADMIN,USER";
-
+  private static final LoginUser.UserStatus USER_STATUS = LoginUser.UserStatus.ACTIVE;
+  
   private PasswordEncoder passwordEncoder;
 
   @Before
@@ -34,7 +35,7 @@ public class AuthServiceTest {
     final String hashedPassword = passwordEncoder.encode(USER_PASSWORD);
     final AuthRepository authRepository = mock(AuthRepository.class);
     when(authRepository.findById(eq(USER_EMAIL)))
-        .thenReturn(Optional.of(new LoginUser(USER_EMAIL, hashedPassword, USER_ID, USER_ROLES)));
+        .thenReturn(Optional.of(new LoginUser(USER_EMAIL, hashedPassword, USER_ID, USER_ROLES, USER_STATUS)));
 
     final AuthServiceImpl service = new AuthServiceImpl(authRepository, passwordEncoder);
     try {

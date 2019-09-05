@@ -1,6 +1,7 @@
 package playground.agileboard.model;
 
 import static org.springframework.util.StringUtils.isEmpty;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,16 +22,23 @@ public class LoginUser implements UserDetails {
   private String password;
   private Integer userId;
   private String roles;
+  private UserStatus status;
+  private Instant lastLogin;
   
   public LoginUser() {}
 
+  public LoginUser(final String email, final String password, final Integer userId, final String roles, final UserStatus status) {
+    this(email, password, userId, roles, status, null);
+  }
 
-  public LoginUser(final String email, final String password, final Integer userId, final String roles) {
+  public LoginUser(final String email, final String password, final Integer userId, final String roles, final UserStatus status, final Instant lastLogin) {
 
     this.email = email;
     this.password = password;
     this.userId = userId;
     this.roles = roles;
+    this.status = status;
+    this.lastLogin = lastLogin;
   }
 
   @Override
@@ -97,5 +105,28 @@ public class LoginUser implements UserDetails {
   
   public void setRoles(final String roles) {
     this.roles = roles;
+  }
+  
+  
+  public UserStatus getStatus() {
+    return status;
+  }
+
+  public void setStatus(final UserStatus status) {
+    this.status = status;
+  }
+
+  public Instant getLastLogin() {
+    return lastLogin;
+  }
+
+  public void setLastLogin(final Instant lastLogin) {
+    this.lastLogin = lastLogin;
+  }
+
+
+  public enum UserStatus {
+    ACTIVE,
+    INACTIVE
   }
 }

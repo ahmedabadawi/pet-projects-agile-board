@@ -1,41 +1,22 @@
-CREATE SEQUENCE IF NOT EXISTS public.app_user_id_seq;
-
-CREATE TABLE IF NOT EXISTS public.app_user (
-	id		integer NOT NULL	DEFAULT nextval('public.app_user_id_seq'),
-	email	varchar(255) NOT NULL,
-	first_name	varchar(255) NOT NULL,
-	last_name		varchar(255) NOT NULL,
-	last_login	timestamp ,
-	status			varchar(10) NOT NULL,
-	PRIMARY KEY (id)
-);
-
-ALTER SEQUENCE public.app_user_id_seq
-	OWNED BY public.app_user.id;
-
 CREATE TABLE IF NOT EXISTS public.auth_user (
 	email	varchar(255) NOT NULL,
 	password	varchar(255) NOT NULL,
 	roles			varchar(255) NOT NULL,
 	user_id		integer NOT NULL,
-	PRIMARY KEY (email),
-	CONSTRAINT auth_user_app_user_fk FOREIGN KEY (user_id)
-		REFERENCES public.app_user (id) MATCH SIMPLE
-		ON UPDATE NO ACTION ON DELETE NO ACTION
+	last_login	timestamp ,
+	status			varchar(10) NOT NULL,
+	PRIMARY KEY (email)
 );
 
-CREATE TABLE IF NOT EXISTS public.user_profile (
-	user_id		integer NOT NULL,	
-	email	varchar(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS public.app_user (
+	id			integer NOT NULL,	
+	email				varchar(255) NOT NULL,
 	first_name	varchar(255) NOT NULL,
 	last_name		varchar(255) NOT NULL,
-	bio	varchar(255),
-	photo			varchar(255),
+	bio					varchar(255),
+	photo				varchar(255),
 	
-	PRIMARY KEY (user_id),
-	CONSTRAINT user_profile_app_user_fk FOREIGN KEY (user_id)
-		REFERENCES public.app_user (id) MATCH SIMPLE
-		ON UPDATE NO ACTION ON DELETE NO ACTION
+	PRIMARY KEY (id)
 );
 
 CREATE SEQUENCE IF NOT EXISTS public.project_id_seq;
@@ -49,7 +30,7 @@ CREATE TABLE IF NOT EXISTS public.project (
 	start_date	timestamp,
 	end_date	timestamp ,
 	PRIMARY KEY (id),
-	CONSTRAINT project_admin_app_user_fk FOREIGN KEY (admin_id)
+	CONSTRAINT project_admin_user_fk FOREIGN KEY (admin_id)
 		REFERENCES public.app_user (id) MATCH SIMPLE
 		ON UPDATE NO ACTION ON DELETE NO ACTION
 );
@@ -72,7 +53,7 @@ CREATE TABLE IF NOT EXISTS public.project_member (
 	CONSTRAINT project_member_project_fk FOREIGN KEY (project_id)
 		REFERENCES public.project (id) MATCH SIMPLE
 		ON UPDATE NO ACTION ON DELETE NO ACTION,
-	CONSTRAINT project_member_app_user_fk FOREIGN KEY (user_id)
+	CONSTRAINT project_member_user_fk FOREIGN KEY (user_id)
 		REFERENCES public.app_user (id) MATCH SIMPLE
 		ON UPDATE NO ACTION ON DELETE NO ACTION
 );

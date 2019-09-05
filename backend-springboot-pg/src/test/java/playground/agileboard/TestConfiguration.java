@@ -6,7 +6,6 @@ import playground.agileboard.repository.AuthRepository;
 import playground.agileboard.repository.ProjectMemberRepository;
 import playground.agileboard.repository.ProjectRepository;
 import playground.agileboard.repository.UserProfileRepository;
-import playground.agileboard.repository.UserRepository;
 import playground.agileboard.repository.WorkItemRepository;
 
 @Configuration
@@ -21,9 +20,6 @@ public class TestConfiguration {
   
   @MockBean
   private WorkItemRepository workItemRepository;
-  
-  @MockBean
-  private UserRepository userRepository;
   
   @MockBean
   private UserProfileRepository userProfileRepository;

@@ -42,7 +42,7 @@ public class AuthControllerTest {
     final Integer userId = 999;
 
     when(authService.loadUserByUsername(request.getEmail())).thenReturn(new LoginUser(
-        request.getEmail(), passwordEncoder.encode(request.getPassword()), userId, "ADMIN,USER"));
+        request.getEmail(), passwordEncoder.encode(request.getPassword()), userId, "ADMIN,USER", LoginUser.UserStatus.ACTIVE));
 
     mvc.perform(post("/auth/login").contentType(MediaType.APPLICATION_JSON)
         .content(MAPPER.writeValueAsBytes(request))).andExpect(status().isOk())

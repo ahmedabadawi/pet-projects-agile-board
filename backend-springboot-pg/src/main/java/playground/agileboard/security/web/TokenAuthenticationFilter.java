@@ -5,8 +5,6 @@ import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -15,7 +13,6 @@ import playground.agileboard.security.TokenBasedPrinciple;
 import playground.agileboard.service.AuthService;
 
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
-  private static final Logger LOG = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
   private static final String AUTH_HEADER = "Authorization";
   private static final String AUTH_HEADER_PREFIX = "Bearer ";
 
