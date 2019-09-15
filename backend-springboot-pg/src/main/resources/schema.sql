@@ -37,6 +37,21 @@ CREATE TABLE IF NOT EXISTS public.project (
 
 ALTER SEQUENCE public.project_id_seq
 	OWNED BY public.project.id;
+
+CREATE OR REPLACE VIEW public.project_details AS
+	SELECT 
+		p.id AS project_id, 
+		p.code, 
+		p.title, 
+		p.description, 
+		p.start_date, 
+		p.end_date, 
+		p.admin_id, 
+		u.email AS admin_email, 
+		u.first_name AS admin_first_name, 
+		u.last_name AS admin_last_name
+	FROM public.project p 
+	INNER JOIN public.app_user u on u.id = p.admin_id;
 	
 CREATE SEQUENCE IF NOT EXISTS public.project_member_id_seq;
 

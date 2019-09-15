@@ -11,7 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import playground.agileboard.controller.dto.Project;
+import playground.agileboard.controller.dto.ProjectDetails;
 import playground.agileboard.controller.dto.ProjectsList;
 import playground.agileboard.service.ProjectService;
 
@@ -35,7 +35,7 @@ public class ProjectController {
     LOGGER.debug("Current Principal: {}", currentPrincipal.getName());
 
     try {
-      final List<Project> projects = projectService.getProjects().stream().map(Project::fromModel)
+      final List<ProjectDetails> projects = projectService.getProjects().stream().map(ProjectDetails::fromModel)
           .collect(Collectors.toList());
       final ProjectsList result = new ProjectsList(projects);
 

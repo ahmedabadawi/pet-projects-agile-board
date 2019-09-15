@@ -20,45 +20,54 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import playground.agileboard.model.Project;
+import playground.agileboard.model.ProjectDetails;
 import playground.agileboard.service.ProjectService;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(ProjectController.class)
 public class ProjectControllerTest {
+  final String ADMIN_EMAIL = "admin@corp.com";
+  final String ADMIN_FIRST_NAME = "John";
+  final String ADMIN_LAST_NAME  = "Doe";
+  
+  final ProjectDetails PROJECT_1 = new ProjectDetails(1, "XYZ", "Project XYZ", "Lorem Ipsum XYZ",
+      Instant.parse("2018-01-01T00:00:00.00Z"), Instant.parse("2022-01-01T00:00:00.00Z"), 1,
+      ADMIN_EMAIL, ADMIN_FIRST_NAME, ADMIN_LAST_NAME);
+  final ProjectDetails PROJECT_2 = new ProjectDetails(2, "ABC", "Project ABC", "Lorem Ipsum ABC",
+      Instant.parse("2019-01-01T00:00:00.00Z"), Instant.parse("2023-01-01T00:00:00.00Z"), 1,
+      ADMIN_EMAIL, ADMIN_FIRST_NAME, ADMIN_LAST_NAME);
+  
   @Autowired
   private MockMvc mvc;
 
   @MockBean
   private ProjectService projectService;
 
-  @WithMockUser(value = "admin@corp.com", authorities = "USER")
+  @WithMockUser(value = ADMIN_EMAIL, authorities = "USER")
   @Test
   public void getProjects_1_project_sucess() throws Exception {
-    final Project testProject = new Project(1, "XYZ", "Project XYZ", "Lorem Ipsum XYZ",
-        Instant.parse("2018-01-01T00:00:00.00Z"), Instant.parse("2022-01-01T00:00:00.00Z"), 1);
-    when(projectService.getProjects()).thenReturn(Collections.singletonList(testProject));
+    
+    when(projectService.getProjects()).thenReturn(Collections.singletonList(PROJECT_1));
 
 
     mvc.perform(get("/api/projects").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
         .andExpect(jsonPath("$.total", equalTo(1))).andExpect(jsonPath("$.projects", hasSize(1)))
-        .andExpect(jsonPath("$.projects[0].id", equalTo(testProject.getId())))
-        .andExpect(jsonPath("$.projects[0].code", equalTo(testProject.getCode())))
-        .andExpect(jsonPath("$.projects[0].title", equalTo(testProject.getTitle())))
-        .andExpect(jsonPath("$.projects[0].description", equalTo(testProject.getDescription())))
-        .andExpect(jsonPath("$.projects[0].startDate", equalTo(testProject.getStartDate().toString())))
-        .andExpect(jsonPath("$.projects[0].endDate", equalTo(testProject.getEndDate().toString())))
-        .andExpect(jsonPath("$.projects[0].adminId", equalTo(testProject.getAdminId())));
+        .andExpect(jsonPath("$.projects[0].projectId", equalTo(PROJECT_1.getProjectId())))
+        .andExpect(jsonPath("$.projects[0].code", equalTo(PROJECT_1.getCode())))
+        .andExpect(jsonPath("$.projects[0].title", equalTo(PROJECT_1.getTitle())))
+        .andExpect(jsonPath("$.projects[0].description", equalTo(PROJECT_1.getDescription())))
+        .andExpect(jsonPath("$.projects[0].startDate", equalTo(PROJECT_1.getStartDate().toString())))
+        .andExpect(jsonPath("$.projects[0].endDate", equalTo(PROJECT_1.getEndDate().toString())))
+        .andExpect(jsonPath("$.projects[0].adminId", equalTo(PROJECT_1.getAdminId())))
+        .andExpect(jsonPath("$.projects[0].adminEmail", equalTo(PROJECT_1.getAdminEmail())))
+        .andExpect(jsonPath("$.projects[0].adminFirstName", equalTo(PROJECT_1.getAdminFirstName())))
+        .andExpect(jsonPath("$.projects[0].adminLastName", equalTo(PROJECT_1.getAdminLastName())));
   }
 
-  @WithMockUser(value = "admin@corp.com", authorities = "USER")
+  @WithMockUser(value = ADMIN_EMAIL, authorities = "USER")
   @Test
   public void getProjects_2_projects_sucess() throws Exception {
-    final List<Project> testProjects = Arrays.asList(
-        new Project(1, "XYZ", "Project XYZ", "Lorem Ipsum XYZ",
-        Instant.parse("2018-01-01T00:00:00.00Z"), Instant.parse("2022-01-01T00:00:00.00Z"), 1),
-        new Project(2, "ABC", "Project ABC", "Lorem Ipsum ABC",
-            Instant.parse("2019-01-01T00:00:00.00Z"), Instant.parse("2023-01-01T00:00:00.00Z"), 1));
+    final List<ProjectDetails> testProjects = Arrays.asList(PROJECT_1, PROJECT_2);
     when(projectService.getProjects()).thenReturn(testProjects);
 
 
@@ -66,7 +75,7 @@ public class ProjectControllerTest {
         .andExpect(jsonPath("$.total", equalTo(2))).andExpect(jsonPath("$.projects", hasSize(2)));
   }
   
-  @WithMockUser(value = "admin@corp.com", authorities = "USER")
+  @WithMockUser(value = ADMIN_EMAIL, authorities = "USER")
   @Test
   public void getProjects_0_projects_sucess() throws Exception {
     when(projectService.getProjects()).thenReturn(new ArrayList<>());

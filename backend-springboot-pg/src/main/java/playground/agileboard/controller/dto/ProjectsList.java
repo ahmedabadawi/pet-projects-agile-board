@@ -4,11 +4,11 @@ import java.util.List;
 
 public class ProjectsList {
   private Integer total;
-  private List<Project> projects;
+  private List<ProjectDetails> projects;
   
   public ProjectsList() {}
   
-  public ProjectsList(final List<Project> projects) {
+  public ProjectsList(final List<ProjectDetails> projects) {
     this.projects = projects;
     this.total = projects.size();
   }
@@ -21,11 +21,11 @@ public class ProjectsList {
     this.total = total;
   }
 
-  public List<Project> getProjects() {
+  public List<ProjectDetails> getProjects() {
     return projects;
   }
 
-  public void setProjects(List<Project> projects) {
+  public void setProjects(List<ProjectDetails> projects) {
     this.projects = projects;
   }
 }

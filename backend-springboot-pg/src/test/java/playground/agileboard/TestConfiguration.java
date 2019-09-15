@@ -3,6 +3,7 @@ package playground.agileboard;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Configuration;
 import playground.agileboard.repository.AuthRepository;
+import playground.agileboard.repository.ProjectDetailsRepository;
 import playground.agileboard.repository.ProjectMemberRepository;
 import playground.agileboard.repository.ProjectRepository;
 import playground.agileboard.repository.UserProfileRepository;
@@ -15,6 +16,9 @@ public class TestConfiguration {
   @MockBean
   private ProjectRepository projectRepository;
   
+  @MockBean
+  private ProjectDetailsRepository projectDetailsRepository;
+
   @MockBean
   private ProjectMemberRepository projectMemberRepository;
   

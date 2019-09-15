@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
@@ -22,6 +24,7 @@ public class LoginUser implements UserDetails {
   private String password;
   private Integer userId;
   private String roles;
+  @Enumerated(EnumType.STRING)
   private UserStatus status;
   private Instant lastLogin;
   
